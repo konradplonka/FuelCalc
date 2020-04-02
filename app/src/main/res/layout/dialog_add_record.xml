@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/card_bg"
+    android:layout_height="wrap_content"
+    android:layout_width="350dp">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dane"
+        android:textColor="#212121"
+        android:textSize="20sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:id="@+id/station_addRecord_imageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:background="@drawable/oval_unknown"
+        android:src="@drawable/unknown"
+        android:tag="UNKNOWN"/>
+
+    <Button
+        android:id="@+id/set_station_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif"
+        android:text="Ustaw stacje"
+        android:textAllCaps="false"
+        android:textColor="@color/green" />
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/distance_addRecord_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="Licznik [km]"
+                android:inputType="numberDecimal"
+                android:textAlignment="textStart"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/dividerColor"/>
+
+            <EditText
+                android:id="@+id/amount_of_fuel_addRecord_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="Zatankowano [l]"
+                android:inputType="numberDecimal"
+                android:textAlignment="textStart"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/dividerColor"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/total_cost_radioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:textColor="@android:color/white"
+                        android:text="Całk. koszt"
+                        android:gravity="center"
+                        android:button="@android:color/transparent"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_left_selector"
+                        android:checked="true" />
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/price_per_l_radioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:textColor="@color/green"
+                        android:text="Cena za l"
+                        android:gravity="center"
+                        android:button="@android:color/transparent"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_right_selector" />
+
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+                    <EditText
+                        android:id="@+id/cost_addRecord_editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="Całkowity koszt [zł]"
+                        android:inputType="numberDecimal"
+                        android:drawablePadding="16dp"
+                        android:textSize="14sp"
+                        android:textAlignment="center"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@color/dividerColor"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <EditText
+            android:id="@+id/date_addRecord_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Data"
+            android:textAlignment="textStart"
+            android:textSize="14sp"
+            android:focusable="false"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/dividerColor"/>
+
+            <EditText
+                android:id="@+id/description_addRecord_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="Opis"
+                android:textAlignment="textStart"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/dividerColor"/>
+
+                <ImageButton
+                    android:id="@+id/add_record_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/oval_button"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="#fff"
+                    android:src="@drawable/done_icon_24dp"
+                    />
+
+
+        </LinearLayout>
+
+</LinearLayout>
+</RelativeLayout>

@@ -1,7 +1,691 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
+    android:id="@+id/item_container_relativeLayout"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/backgroundColor">
+
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp">
+        <Button
+            android:id="@+id/costs_per_person_button"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/button_rectangle_selector"
+            android:text="Koszty na os."
+            android:textSize="10dp"
+            android:textColor="#fff"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/fuel_usage_button"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/button_rectangle_selector"
+            android:text="Spalanie"
+            android:textSize="10dp"
+            android:textColor="#fff"
+            android:layout_weight="1"/>/>
+        <Button
+            android:id="@+id/range_button"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/button_rectangle_selector"
+            android:text="Zasięg"
+            android:textSize="10dp"
+            android:textColor="#fff"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Dane"
+    android:textColor="#212121"
+    android:textSize="20sp"
+    android:layout_marginLeft="16dp"
+    android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/costs_per_person_get_data_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        card_view:cardCornerRadius="16dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:contentPadding="10dp"
+        card_view:cardElevation="0dp">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/distance_price_per_person_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Odległość [km]"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/dividerColor"/>
+
+        <EditText
+            android:id="@+id/fuel_price_price_per_person_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Cena za litr [zł]"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/dividerColor"/>
+
+        <EditText
+            android:id="@+id/fuel_consumption_price_per_person_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Zużycie paliwa [l/100km]"
+            android:inputType="numberDecimal"
+            android:drawablePadding="16dp"
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/dividerColor"/>
+
+        <EditText
+            android:id="@+id/number_of_people_price_per_person_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Ilość osób"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textSize="14sp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/dividerColor"/>
+
+        </LinearLayout>
+</androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fuel_consumption_get_data_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        card_view:cardCornerRadius="16dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:contentPadding="10dp"
+        card_view:cardElevation="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/distance_fuel_consumption_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableLeft="@null"
+            android:hint="Odległość [km]"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/dividerColor"/>
+
+        <EditText
+            android:id="@+id/fuel_price_fuel_consumption_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Cena za litr [zł]"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/dividerColor"/>
+
+        <EditText
+            android:id="@+id/amount_of_fuel_fuel_consumption_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Ilość paliwa [l]"
+            android:inputType="numberDecimal"
+
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/dividerColor"/>
+
+
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/range_get_data_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        card_view:cardCornerRadius="16dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:contentPadding="10dp"
+        card_view:cardElevation="0dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/fuel_consumption_range_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Zużycie paliwa [l/100km]"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/dividerColor"/>
+
+        <EditText
+            android:id="@+id/fuel_price_range_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Cena za litr [zł]"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/dividerColor"/>
+
+        <EditText
+            android:id="@+id/amount_of_fuel_range_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Ilość paliwa [l]"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/dividerColor"/>
+
+
+    </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/results_text_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Wyniki"
+        android:textColor="#212121"
+        android:textSize="20sp"
+        android:layout_marginLeft="16dp"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:id="@+id/costs_per_person_results_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            card_view:cardCornerRadius="16dp"
+
+            card_view:cardUseCompatPadding="true"
+            card_view:contentPadding="10dp"
+            card_view:cardElevation="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/cost_per_person_imageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/cost_per_person_icon_18dp"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/cost_per_person_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:text="Koszt na osobę"
+                        android:textStyle="bold"
+                        android:textColor="#fe4901"
+                        android:layout_toRightOf="@id/cost_per_person_imageView"
+                        />
+                    <TextView
+                        android:id="@+id/cost_per_person_result_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0.00 zł"
+                        android:textSize="24sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/cost_per_person_textView"/>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                card_view:cardCornerRadius="16dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:contentPadding="10dp"
+                android:layout_weight="1"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/fuel_usage_imageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/fuel_usage_icon_18dp"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/fuel_usage_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:text="Zużyte paliwa"
+                        android:textStyle="bold"
+                        android:textColor="#fe4901"
+                        android:layout_toRightOf="@id/fuel_usage_imageView"
+                        />
+                    <TextView
+                        android:id="@+id/fuel_usage_result_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0.00 l"
+                        android:textSize="24sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/fuel_usage_textView"/>
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                card_view:cardCornerRadius="16dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:contentPadding="10dp"
+                android:layout_weight="1"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/total_cost_imageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/total_cost_icon"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/total_cost_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:text="Całkowity koszt"
+                        android:textStyle="bold"
+                        android:textColor="#fe4901"
+                        android:layout_toRightOf="@id/total_cost_imageView"
+                        />
+                    <TextView
+                        android:id="@+id/total_cost_price_per_person_result_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0.00 zł"
+                        android:textSize="24sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/total_cost_textView"/>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+
+
 
 </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fuel_consumption_results_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                card_view:cardCornerRadius="16dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:contentPadding="10dp"
+                android:layout_weight="1"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/average_fuel_consumption_imageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/fuel_usage_icon_18dp"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/average_fuel_consumption_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:text="Średnie spalanie"
+                        android:textStyle="bold"
+                        android:textColor="#fe4901"
+                        android:layout_toRightOf="@id/average_fuel_consumption_imageView"
+                        />
+                    <TextView
+                        android:id="@+id/average_fuel_consumption_result_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0.00 l/100km"
+                        android:textSize="24sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/average_fuel_consumption_textView"/>
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                card_view:cardCornerRadius="16dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:contentPadding="10dp"
+                android:layout_weight="1"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/total_cost_fuel_consumption_imageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/total_cost_icon"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/total_cost_fuel_consumption_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:text="Całkowity koszt"
+                        android:textStyle="bold"
+                        android:textColor="#fe4901"
+                        android:layout_toRightOf="@id/total_cost_fuel_consumption_imageView"
+                        />
+                    <TextView
+                        android:id="@+id/total_cost_fuel_consumption_result_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0.00 zł"
+                        android:textSize="24sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/total_cost_fuel_consumption_textView"/>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/range_results_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                card_view:cardCornerRadius="16dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:contentPadding="10dp"
+                android:layout_weight="1"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/range_imageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/distance_icon_18dp"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/range_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:text="Zasięg"
+                        android:textStyle="bold"
+                        android:textColor="#fe4901"
+                        android:layout_toRightOf="@id/range_imageView" />
+                    <TextView
+                        android:id="@+id/range_result_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0.00 km"
+                        android:textSize="24sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/range_textView"/>
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                card_view:cardCornerRadius="16dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:contentPadding="10dp"
+                android:layout_weight="1"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/total_cost_range_imageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/total_cost_icon"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/total_cost_range_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:text="Całkowity koszt"
+                        android:textStyle="bold"
+                        android:textColor="#fe4901"
+                        android:layout_toRightOf="@id/total_cost_range_imageView"
+                        />
+                    <TextView
+                        android:id="@+id/total_cost_range_result_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0.00 zł"
+                        android:textSize="24sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/total_cost_range_textView"/>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/calculate_floatingButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_margin="@dimen/fab_margin"
+    android:clickable="true"
+
+    android:src="@drawable/equal_sign_24dp"
+    />
+</RelativeLayout>

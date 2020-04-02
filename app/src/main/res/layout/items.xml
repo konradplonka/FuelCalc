@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp">
+
+    <RelativeLayout
+        android:id="@+id/item_container_relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/card_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/options_imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_more_vert_light_24dp"
+            android:background="@null"/>
+
+        <TextView
+            android:id="@+id/date_item_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/options_imageButton"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="36dp"
+            android:text="2020-03-15" />
+
+        <TextView
+            android:id="@+id/distance_item_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/options_imageButton"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="8dp"
+            android:text="222 000 km"
+            android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:id="@+id/data_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/distance_item_textView">
+        <ImageView
+            android:id="@+id/cash_imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/cash_icon_light_18dp"
+            android:layout_below="@id/distance_item_textView"/>
+
+        <TextView
+            android:id="@+id/total_cost_item_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="230.30 zł"
+            android:layout_below="@id/distance_item_textView"
+            android:layout_toRightOf="@id/cash_imageView"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/arrow_right_light_18dp"
+            android:layout_below="@id/distance_item_textView"
+            android:layout_toRightOf="@id/total_cost_item_textView"/>
+
+        <TextView
+            android:id="@+id/cost_per_l_item_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="4.65 zł"
+            android:layout_below="@id/distance_item_textView"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/amount_of_fuel_light_18dp"
+            android:layout_below="@id/distance_item_textView"/>
+
+        <TextView
+            android:id="@+id/amount_of_fuel_item_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="50 l"
+            android:layout_below="@id/distance_item_textView"/>
+
+
+
+    </LinearLayout>
+        <TextView
+            android:id="@+id/description_item_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_below="@id/data_linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="36dp" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/petrol_station_image"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/item_container_relativeLayout"
+        app:layout_constraintStart_toStartOf="@+id/item_container_relativeLayout"
+        app:layout_constraintTop_toTopOf="@+id/item_container_relativeLayout"
+        android:src="@drawable/orlen"
+        android:padding="8dp"
+        android:background="@drawable/oval_bp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
