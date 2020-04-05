@@ -134,14 +134,16 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0 && (addRecordFabButton.isShown() && backupFabButton.isShown())){
+                if (dy > 0 && (addRecordFabButton.isShown() && backupFabButton.isShown() && settingsFabButton.isShown())){
                     addRecordFabButton.hide();
                     backupFabButton.hide();
+                    settingsFabButton.hide();
                 }
 
-                else if (dy < 0 && (!addRecordFabButton.isShown() && !backupFabButton.isShown())){
+                else if (dy < 0 && (!addRecordFabButton.isShown() && !backupFabButton.isShown() && !settingsFabButton.isShown())){
                     addRecordFabButton.show();
                     backupFabButton.show();
+                    settingsFabButton.show();
                 }
             }
         });

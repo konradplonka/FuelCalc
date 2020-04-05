@@ -36,7 +36,8 @@
             android:layout_below="@id/options_imageButton"
             android:layout_alignParentRight="true"
             android:layout_marginRight="36dp"
-            android:text="2020-03-15" />
+            android:text="2020-03-15"
+            android:textColor="?attr/contentText"/>
 
         <TextView
             android:id="@+id/distance_item_textView"
@@ -47,6 +48,7 @@
             android:layout_marginLeft="36dp"
             android:layout_marginTop="8dp"
             android:text="222 000 km"
+            android:textColor="?attr/contentText"
             android:textStyle="bold" />
 
 
@@ -73,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="230.30 zł"
+            android:textColor="?attr/contentText"
             android:layout_below="@id/distance_item_textView"
             android:layout_toRightOf="@id/cash_imageView"/>
 
@@ -91,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="4.65 zł"
+            android:textColor="?attr/contentText"
             android:layout_below="@id/distance_item_textView"/>
 
         <ImageView
@@ -107,6 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="50 l"
+            android:textColor="?attr/contentText"
             android:layout_below="@id/distance_item_textView"/>
 
 
@@ -114,6 +119,7 @@
     </LinearLayout>
         <TextView
             android:id="@+id/description_item_textView"
+            android:textColor="?attr/contentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"

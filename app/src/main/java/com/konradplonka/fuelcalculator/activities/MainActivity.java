@@ -1,24 +1,15 @@
 package com.konradplonka.fuelcalculator.activities;
-
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.RadioButton;
-
+import android.util.Log;
 import com.google.android.material.tabs.TabLayout;
 import com.konradplonka.fuelcalculator.R;
-import com.konradplonka.fuelcalculator.fragments.AddRecordDialog;
 import com.konradplonka.fuelcalculator.fragments.CalculatorTab;
-import com.konradplonka.fuelcalculator.fragments.DatePickerFragment;
 import com.konradplonka.fuelcalculator.fragments.DictionaryTab;
 import com.konradplonka.fuelcalculator.fragments.EditRecordDialog;
 import com.konradplonka.fuelcalculator.fragments.SettingsDialog;
-
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -28,18 +19,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements EditRecordDialog.OnEditRecordDialogListener, SettingsDialog.OnSettingsDialogListener {
     DictionaryTab dictionaryTab;
+    public boolean isDark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+        isDark = getThemeStatePref();
+        Log.e("DARK: ", String.valueOf(isDark));
+        if(isDark){
             setTheme(R.style.DarkTheme);
         }
-        else setTheme(R.style.AppTheme_NoActionBar);
+        else{
+            setTheme(R.style.AppTheme);
+        }
 
 
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -62,7 +59,28 @@ public class MainActivity extends AppCompatActivity implements EditRecordDialog.
     @Override
     public void setNightMode() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        saveThemeStatePref(true);
         restartApp();
+    }
+
+    @Override
+    public void setLightMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        saveThemeStatePref(false);
+        restartApp();
+    }
+
+    private void saveThemeStatePref(boolean isDark){
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("myPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isDark", isDark);
+        editor.commit();
+    }
+    public boolean getThemeStatePref(){
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("myPref", MODE_PRIVATE);
+        boolean isDark = sharedPreferences.getBoolean("isDark", false);
+
+        return isDark;
     }
 
     private void restartApp() {
@@ -71,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements EditRecordDialog.
         finish();
 
     }
+
+
+
 
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
