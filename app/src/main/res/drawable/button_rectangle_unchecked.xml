@@ -5,7 +5,7 @@
         android:shape="rectangle">
         <size android:height="20dp" android:width="80dp"></size>
         <solid
-            android:color="#BDBDBD"
+            android:color="?attr/calculatorButtonColor"
             />
         <corners
             android:bottomLeftRadius="500dp"

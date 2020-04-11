@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dane"
-        android:textColor="#212121"
+        android:textColor="?attr/headerText"
         android:textSize="20sp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
@@ -40,7 +40,7 @@
         android:fontFamily="sans-serif"
         android:text="Ustaw stacje"
         android:textAllCaps="false"
-        android:textColor="@color/green" />
+        android:textColor="@color/colorAccent" />
 
 
     <LinearLayout
@@ -61,12 +61,14 @@
                 android:hint="Licznik [km]"
                 android:inputType="numberDecimal"
                 android:textAlignment="textStart"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textColor="?attr/contentText"
+                android:textColorHint="?attr/contentText"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/dividerColor"/>
+                android:background="?attr/dividerText"/>
 
             <EditText
                 android:id="@+id/amount_of_fuel_addRecord_editText"
@@ -78,12 +80,14 @@
                 android:hint="Zatankowano [l]"
                 android:inputType="numberDecimal"
                 android:textAlignment="textStart"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textColor="?attr/contentText"
+                android:textColorHint="?attr/contentText"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/dividerColor"/>
+                android:background="?attr/dividerText"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -110,7 +114,7 @@
                         android:id="@+id/price_per_l_radioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="28dp"
-                        android:textColor="@color/green"
+                        android:textColor="@color/colorAccent"
                         android:text="Cena za l"
                         android:gravity="center"
                         android:button="@android:color/transparent"
@@ -135,14 +139,16 @@
                         android:inputType="numberDecimal"
                         android:drawablePadding="16dp"
                         android:textSize="14sp"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="?attr/contentText"
+                        android:textColorHint="?attr/contentText"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="4dp"
-                        android:background="@color/dividerColor"/>
+                        android:background="?attr/dividerText"/>
 
                 </LinearLayout>
 
@@ -160,13 +166,15 @@
             android:hint="Data"
             android:textAlignment="textStart"
             android:textSize="14sp"
-            android:focusable="false"/>
+            android:focusable="false"
+            android:textColor="?attr/contentText"
+            android:textColorHint="?attr/contentText"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/dividerColor"/>
+                android:background="?attr/dividerText"/>
 
             <EditText
                 android:id="@+id/description_addRecord_editText"
@@ -177,12 +185,14 @@
                 android:background="@null"
                 android:hint="Opis"
                 android:textAlignment="textStart"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textColor="?attr/contentText"
+                android:textColorHint="?attr/contentText"/>/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/dividerColor"/>
+                android:background="?attr/dividerText"/>
 
                 <ImageButton
                     android:id="@+id/add_record_button"

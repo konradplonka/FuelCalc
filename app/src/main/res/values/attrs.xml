@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ds">
+        <attr name="headerText" format="color"/>
+        <attr name="contentText" format="color"/>
+        <attr name="dividerText" format="color"/>
+        <attr name="calculatorButtonColor" format="color"/>
         <attr name="backgroundColor" format="color"/>
         <attr name="cardBackgroundColor" format="color"/>
     </declare-styleable>

@@ -1,4 +1,4 @@
-package com.konradplonka.fuelcalculator;
+package com.konradplonka.fuelcalculator.other;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,46 +1,34 @@
-package com.konradplonka.fuelcalculator.fragments;
+package com.konradplonka.fuelcalculator.fragments.dialogs;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import com.konradplonka.fuelcalculator.MyAdapter;
-import com.konradplonka.fuelcalculator.PetrolStation;
-import com.konradplonka.fuelcalculator.PetrolStations;
+import com.konradplonka.fuelcalculator.fragments.DatePickerFragment;
+import com.konradplonka.fuelcalculator.other.PetrolStation;
 import com.konradplonka.fuelcalculator.R;
 import com.konradplonka.fuelcalculator.other.DatabaseHelper;
 
-import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Locale;
 
-import static android.content.ContentValues.TAG;
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-
-public class AddRecordDialog extends DialogFragment implements SetStationDialog.OnSetStationDialogListener, DatePickerFragment.OnDatePickerFragmentListener {
+public class EditRecordDialog extends DialogFragment implements SetStationDialog.OnSetStationDialogListener, DatePickerFragment.OnDatePickerFragmentListener {
 
     private ImageView stationImageView;
     private Button setStationButton;
@@ -53,28 +41,56 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
     private EditText descriptionEditText;
     private ImageButton addRecordButton;
     private DatabaseHelper db;
-    private OnAddRecordDialogListener listener;
+    private OnEditRecordDialogListener listener;
+    private DecimalFormat df;
+
+    private int id;
+    private int position;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_add_record, container, false);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        df = new DecimalFormat("0.00", new DecimalFormatSymbols(Locale.US));
+        df.setMaximumFractionDigits(2);
+        savedInstanceState = getArguments();
+
+        id = savedInstanceState.getInt("id");
+        position = savedInstanceState.getInt("position");
+
         db = new DatabaseHelper(getContext());
 
         initializeAddRecordDialogElements(view);
-        handleCostRadioButtons();
+        fillFieldsWithItemData(savedInstanceState);
+        handleCostRadioButtons(savedInstanceState);
         openSetStationDialog();
-        addRecordToList();
+        handleEditRecord(savedInstanceState);
 
         handleDateEditText();
 
         return view;
     }
 
+    private void fillFieldsWithItemData(Bundle savedInstanceState) {
+
+        ArrayList<PetrolStation> petrolStationsList = PetrolStation.getPetrolStationList();
+        for(PetrolStation petrolStation: petrolStationsList){
+            if(petrolStation.getPetrolStations().toString().equals(savedInstanceState.getString("petrolStation"))){
+                stationImageView.setImageResource(petrolStation.getImageSourceResource());
+                stationImageView.setBackgroundResource(petrolStation.getLayoutBackgroundResource());
+                stationImageView.setTag(savedInstanceState.getString("petrolStation"));
+            }
+        }
+
+        distanceEditText.setText(String.valueOf(savedInstanceState.getInt("distance")));
+        amountOfFuelEditText.setText(df.format(savedInstanceState.getDouble("amountOfFuel")));
+        costEditText.setText(df.format(savedInstanceState.getDouble("totalCost")));
+        dateEditText.setText(savedInstanceState.getString("date"));
+        descriptionEditText.setText(savedInstanceState.getString("description"));
+    }
+
     private void handleDateEditText() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        dateEditText.setText(simpleDateFormat.format(new Date()));
 
         dateEditText.setOnClickListener(new View.OnClickListener() {
 
@@ -85,8 +101,8 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
                 bundle.putString("date", dateEditText.getText().toString());
                 DatePickerFragment datePickerFragment = new DatePickerFragment();
                 datePickerFragment.show(getFragmentManager(), "datePicker");
+                datePickerFragment.setTargetFragment(EditRecordDialog.this, 1);
                 datePickerFragment.setArguments(bundle);
-                datePickerFragment.setTargetFragment(AddRecordDialog.this, 1);
             }
         });
     }
@@ -97,7 +113,7 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
             public void onClick(View v) {
                 SetStationDialog setStationDialog = new SetStationDialog();
                 setStationDialog.show(getFragmentManager(), "setStation");
-                setStationDialog.setTargetFragment(AddRecordDialog.this, 1);
+                setStationDialog.setTargetFragment(EditRecordDialog.this, 1);
 //
             }
         });
@@ -122,7 +138,7 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
 
 
 
-    private void handleCostRadioButtons() {
+    private void handleCostRadioButtons(final Bundle savedInstanceState) {
 
         totalCostRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +149,7 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
                     pricePerLRadioButton.setTextColor(getContext().getResources().getColor(R.color.green));
 
                     costEditText.setHint("Całkowity koszt [zł]");
+                    costEditText.setText(df.format(savedInstanceState.getDouble("totalCost")));
                 }
             }
         });
@@ -146,6 +163,7 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
                     pricePerLRadioButton.setTextColor(Color.WHITE);
 
                     costEditText.setHint("Cena za l [zł]");
+                    costEditText.setText(df.format(savedInstanceState.getDouble("totalCost")/savedInstanceState.getDouble("amountOfFuel")));
 
                 }
             }
@@ -153,60 +171,42 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
     }
 
 
-    private void addRecordToList() {
+    private void handleEditRecord(final Bundle bundle) {
 
 
 
 
-            addRecordButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(!isEmptyField(distanceEditText) && !isNull(distanceEditText) && !isEmptyField(amountOfFuelEditText) && !isNull(amountOfFuelEditText) && !isEmptyField(costEditText) && !isNull(costEditText)) {
-                        if (totalCostRadioButton.isChecked()) {
-                            db.addData(
-                                    stationImageView.getTag().toString(),
-                                    Integer.parseInt(distanceEditText.getText().toString()),
-                                    Double.parseDouble(amountOfFuelEditText.getText().toString()),
-                                    Double.parseDouble(costEditText.getText().toString()),
-                                    dateEditText.getText().toString(),
-                                    descriptionEditText.getText().toString()
-                            );
-                        } else {
-                            db.addData(
-                                    stationImageView.getTag().toString(),
-                                    Integer.parseInt(distanceEditText.getText().toString()),
-                                    Double.parseDouble(amountOfFuelEditText.getText().toString()),
-                                    Double.parseDouble(costEditText.getText().toString()) * Double.parseDouble(amountOfFuelEditText.getText().toString()),
-                                    dateEditText.getText().toString(),
-                                    descriptionEditText.getText().toString()
-                            );
-                        }
 
-                        listener.refreshRecyclerView();
-                        dismiss();
-                    }
+        addRecordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String stationTag = stationImageView.getTag().toString();
+                int distance = Integer.parseInt(distanceEditText.getText().toString());
+                double amountOfFuel = Double.parseDouble(amountOfFuelEditText.getText().toString());
+                double totalCost = 0;
+                String date = dateEditText.getText().toString();
+                String description = descriptionEditText.getText().toString();
+
+                if(totalCostRadioButton.isChecked()){
+                    totalCost = Double.parseDouble(costEditText.getText().toString());
+
+
 
                 }
-            });
+                else{
+                    totalCost = Double.parseDouble(costEditText.getText().toString())*Double.parseDouble(amountOfFuelEditText.getText().toString());
+                }
+
+                if(db.updateData(id, stationTag, distance, amountOfFuel, totalCost, date, description)){
+                    listener.refreshItem(position, stationTag, distance, amountOfFuel, totalCost, date, description);
+
+                }
+                dismiss();
+
+            }
+        });
 
 
-
-
-    }
-
-    private boolean isEmptyField (EditText editText){
-        boolean result = editText.getText().toString().length() <= 0;
-        if (result)
-            Toast.makeText(getContext(), "Uzupełnij wszystkie pola!", Toast.LENGTH_SHORT).show();
-        return result;
-    }
-
-    private boolean isNull(EditText editText){
-        String value=editText.getText().toString();
-        boolean result = Double.parseDouble(value) == 0;
-        if(result)
-            Toast.makeText(getContext(), "Pola nie mogą mieć wartości 0!", Toast.LENGTH_SHORT).show();
-        return result;
 
     }
 
@@ -232,21 +232,19 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
     }
 
 
-
-    public interface OnAddRecordDialogListener{
-        void refreshRecyclerView();
-
+    public interface OnEditRecordDialogListener{
+        void refreshItem(int position, String stationTag, int distance, double amountOfFuel, double totalCost, String date, String description);
     }
 
     @Override
     public void onAttach(Context context) {
-        try{
-            listener = (OnAddRecordDialogListener) getTargetFragment();
-        }catch (ClassCastException e){
-            Log.e(TAG, "onAttach: ClassCastException: " +e.getMessage());
-        }
-
         super.onAttach(context);
+        if(context instanceof  OnEditRecordDialogListener){
+            listener = (OnEditRecordDialogListener) context;
+        }
+        else{
+            throw new RuntimeException(context.toString());
+        }
     }
 
     @Override

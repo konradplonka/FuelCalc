@@ -1,6 +1,8 @@
-package com.konradplonka.fuelcalculator.fragments;
+package com.konradplonka.fuelcalculator.fragments.dialogs;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -10,15 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
-
 import com.konradplonka.fuelcalculator.R;
-
 import static android.content.ContentValues.TAG;
+import static android.content.Context.MODE_PRIVATE;
 
 public class SettingsDialog extends DialogFragment{
     OnSettingsDialogListener listener;
@@ -29,8 +28,11 @@ public class SettingsDialog extends DialogFragment{
 
         View view = inflater.inflate(R.layout.dialog_settings, container, false);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        themeSwitch = (Switch)view.findViewById(R.id.themeSwitch);
 
+
+
+        themeSwitch = (Switch)view.findViewById(R.id.themeSwitch);
+        themeSwitch.setChecked(getThemeStatePref());
         themeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -38,13 +40,22 @@ public class SettingsDialog extends DialogFragment{
                     listener.setNightMode();
 
                 }
-                else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                else listener.setLightMode();
             }
         });
         return view;
     }
+
+
     public interface OnSettingsDialogListener{
         void setNightMode();
+        void setLightMode();
+    }
+    public boolean getThemeStatePref(){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("myPref", MODE_PRIVATE);
+        boolean isDark = sharedPreferences.getBoolean("isDark", false);
+
+        return isDark;
     }
 
     @Override

@@ -315,4 +315,5 @@ public class CalculatorTab extends Fragment {
         return result;
 
     }
+
 }

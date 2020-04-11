@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Wybierz stacje"
-        android:textColor="#212121"
+        android:textColor="?attr/headerText"
         android:textSize="20sp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"

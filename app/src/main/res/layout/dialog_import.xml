@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp" android:layout_height="wrap_content"
+    android:background="@drawable/card_bg">
+    <LinearLayout
+        android:id="@+id/import_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opcje importu"
+            android:textColor="?attr/headerText"
+            android:textSize="20sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold" />
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/clear_database_radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                android:background="@drawable/radio_button_selector"
+                android:text="Chcę usunąć isnitejącą bazę danych"
+                android:textColor="@color/colorAccent"
+                android:button="@android:color/transparent"/>
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/add_to_current_database_radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:background="@drawable/radio_button_selector"
+                android:text="Chcę dodać do istniejącej bazy danych"
+                android:textColor="@color/colorAccent"
+                android:button="@android:color/transparent"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+    <ImageButton
+        android:id="@+id/import_imageButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/oval_button"
+        android:layout_below="@id/import_linearLayout"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:textColor="#fff"
+        android:src="@drawable/done_icon_24dp" />
+
+
+</RelativeLayout>
