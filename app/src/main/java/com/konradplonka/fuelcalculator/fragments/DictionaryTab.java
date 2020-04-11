@@ -1,7 +1,6 @@
 package com.konradplonka.fuelcalculator.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.konradplonka.fuelcalculator.ListItem;
-import com.konradplonka.fuelcalculator.MyAdapter;
+import com.konradplonka.fuelcalculator.activities.MainActivity;
+import com.konradplonka.fuelcalculator.fragments.dialogs.AddRecordDialog;
+import com.konradplonka.fuelcalculator.fragments.dialogs.BackupDialog;
+import com.konradplonka.fuelcalculator.fragments.dialogs.ImportDialog;
+import com.konradplonka.fuelcalculator.fragments.dialogs.SettingsDialog;
+import com.konradplonka.fuelcalculator.other.ListItem;
+import com.konradplonka.fuelcalculator.other.MyAdapter;
 import com.konradplonka.fuelcalculator.R;
 import com.konradplonka.fuelcalculator.other.DatabaseHelper;
 import java.util.ArrayList;
@@ -58,6 +62,7 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
 
         addRecord();
         openSettings();
+        openBackup();
 
         return view;
     }
@@ -113,6 +118,17 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
             public void onClick(View v) {
                 SettingsDialog settingsDialog = new SettingsDialog();
                 settingsDialog.show(getFragmentManager(), "SettingsDialog");
+
+            }
+        });
+    }
+    private void openBackup(){
+        backupFabButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BackupDialog backupDialog = new BackupDialog();
+                backupDialog.show(getFragmentManager(), "BackupDialog");
+                backupDialog.setTargetFragment(DictionaryTab.this, 1);
             }
         });
     }
@@ -123,7 +139,7 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
         settingsFabButton = (FloatingActionButton) view.findViewById(R.id.settingsButton);
     }
 
-    private void loadDatabase(){
+    public void loadDatabase(){
         // Read from database and add to recycler view
         adapter.addRecordsFromDatabase();
         adapter.sortData();
@@ -151,15 +167,17 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
     }
 
 
-
     @Override
     public void refreshRecyclerView() {
         adapter.addLatestRecordFromDatabase();
         adapter.sortData();
     }
 
+
     public void updateItemData(int position, String stationTag, int distance, double amountOfFuel, double totalCost, String date, String description){
         adapter.updateRecord(position, stationTag, distance, amountOfFuel, totalCost, date, description);
         Toast.makeText(getContext(), "Zaktualizowano!", Toast.LENGTH_SHORT);
     }
+
+
 }

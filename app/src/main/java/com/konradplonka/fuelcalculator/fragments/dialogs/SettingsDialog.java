@@ -1,4 +1,4 @@
-package com.konradplonka.fuelcalculator.fragments;
+package com.konradplonka.fuelcalculator.fragments.dialogs;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,15 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
-
 import com.konradplonka.fuelcalculator.R;
-import com.konradplonka.fuelcalculator.activities.MainActivity;
-
 import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
 

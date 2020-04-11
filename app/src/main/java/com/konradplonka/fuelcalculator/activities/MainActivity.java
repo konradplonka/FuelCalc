@@ -1,4 +1,5 @@
 package com.konradplonka.fuelcalculator.activities;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,8 +8,12 @@ import com.google.android.material.tabs.TabLayout;
 import com.konradplonka.fuelcalculator.R;
 import com.konradplonka.fuelcalculator.fragments.CalculatorTab;
 import com.konradplonka.fuelcalculator.fragments.DictionaryTab;
-import com.konradplonka.fuelcalculator.fragments.EditRecordDialog;
-import com.konradplonka.fuelcalculator.fragments.SettingsDialog;
+import com.konradplonka.fuelcalculator.fragments.dialogs.AddRecordDialog;
+import com.konradplonka.fuelcalculator.fragments.dialogs.EditRecordDialog;
+import com.konradplonka.fuelcalculator.fragments.dialogs.SettingsDialog;
+import com.konradplonka.fuelcalculator.other.DatabaseHelper;
+import com.nbsp.materialfilepicker.ui.FilePickerActivity;
+
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,11 +21,14 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.FileNotFoundException;
+
+import static android.content.ContentValues.TAG;
+
 
 public class MainActivity extends AppCompatActivity implements EditRecordDialog.OnEditRecordDialogListener, SettingsDialog.OnSettingsDialogListener {
     DictionaryTab dictionaryTab;
     public boolean isDark;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -32,8 +40,6 @@ public class MainActivity extends AppCompatActivity implements EditRecordDialog.
         else{
             setTheme(R.style.AppTheme);
         }
-
-
 
         super.onCreate(savedInstanceState);
 
@@ -120,5 +126,23 @@ public class MainActivity extends AppCompatActivity implements EditRecordDialog.
 
 
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK){
+            String backupPath = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
+            try{
+                DatabaseHelper databaseHelper = new DatabaseHelper(getBaseContext());
+                databaseHelper.importDatabase(backupPath);
+                dictionaryTab.loadDatabase();
+
+            }
+            catch (FileNotFoundException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
 }

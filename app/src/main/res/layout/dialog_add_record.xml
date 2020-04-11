@@ -40,7 +40,7 @@
         android:fontFamily="sans-serif"
         android:text="Ustaw stacje"
         android:textAllCaps="false"
-        android:textColor="@color/green" />
+        android:textColor="@color/colorAccent" />
 
 
     <LinearLayout
@@ -114,7 +114,7 @@
                         android:id="@+id/price_per_l_radioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="28dp"
-                        android:textColor="@color/green"
+                        android:textColor="@color/colorAccent"
                         android:text="Cena za l"
                         android:gravity="center"
                         android:button="@android:color/transparent"

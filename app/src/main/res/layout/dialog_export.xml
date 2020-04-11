@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp" android:layout_height="wrap_content"
+    android:background="@drawable/card_bg">
+    <TextView
+        android:id="@+id/setFileName_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ustaw nazwę pliku"
+        android:textColor="?attr/headerText"
+        android:textSize="20sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold" />
+    <EditText
+        android:id="@+id/fileName_editText"
+        android:layout_below="@id/setFileName_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="?attr/contentText"
+        android:background="@null"
+        android:textColorHint="?attr/contentText"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
+    <View
+        android:id="@+id/divider_fileName"
+        android:layout_below="@id/fileName_editText"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:background="?attr/dividerText"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <ImageButton
+        android:id="@+id/export_imageButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/oval_button"
+        android:layout_below="@id/divider_fileName"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:textColor="#fff"
+        android:src="@drawable/done_icon_24dp"
+        />
+    <LinearLayout
+        android:id="@+id/progressBar_linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/progress_bar_bg"
+        android:layout_below="@id/divider_fileName"
+        android:layout_alignParentRight="true"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/progressBar_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zakończono!"
+            android:textColor="#fff"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"/>
+
+        <ImageView
+            android:id="@+id/progressBar_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/done_icon_24dp"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package com.konradplonka.fuelcalculator.fragments;
+package com.konradplonka.fuelcalculator.fragments.dialogs;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -19,8 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.DialogFragment;
 
-import com.konradplonka.fuelcalculator.PetrolStation;
-import com.konradplonka.fuelcalculator.PetrolStations;
+import com.konradplonka.fuelcalculator.other.PetrolStation;
+import com.konradplonka.fuelcalculator.other.PetrolStations;
 import com.konradplonka.fuelcalculator.R;
 
 import java.util.ArrayList;
@@ -97,7 +97,7 @@ public class SetStationDialog extends DialogFragment{
 
             button.setLayoutParams(params);
             button.setBackground(getResources().getDrawable(R.drawable.radio_button_selector));
-            button.setTextColor(getResources().getColor(R.color.green));
+            button.setTextColor(getResources().getColor(R.color.colorAccent));
             button.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
             button.setPadding(getDpSize(16), getDpSize(4), getDpSize(16), getDpSize(4));
 
@@ -127,7 +127,7 @@ public class SetStationDialog extends DialogFragment{
 
                         for(RadioButton radioButton : radioButtons){
                             if(!radioButton.isChecked()){
-                                radioButton.setTextColor(getResources().getColor(R.color.green));
+                                radioButton.setTextColor(getResources().getColor(R.color.colorAccent));
                             }
 
                         }

@@ -1,13 +1,8 @@
-package com.konradplonka.fuelcalculator;
+package com.konradplonka.fuelcalculator.other;
 
 
 import android.content.Context;
 import android.database.sqlite.SQLiteCursor;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -24,15 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.konradplonka.fuelcalculator.fragments.AddRecordDialog;
-import com.konradplonka.fuelcalculator.fragments.DictionaryTab;
-import com.konradplonka.fuelcalculator.fragments.EditRecordDialog;
-import com.konradplonka.fuelcalculator.fragments.SetStationDialog;
-import com.konradplonka.fuelcalculator.other.DatabaseHelper;
+import com.konradplonka.fuelcalculator.R;
+import com.konradplonka.fuelcalculator.fragments.dialogs.EditRecordDialog;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -210,7 +200,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         listItems.clear();
         DatabaseHelper db = new DatabaseHelper(context);
         SQLiteCursor cursor = db.getData();
-
+        Log.e("Cursor count ", String.valueOf(cursor.getCount()));
         if(cursor.getCount() > 0){
             while(cursor.moveToNext()){
                 int id = cursor.getInt(0);
@@ -220,6 +210,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                 double totalCost = cursor.getDouble(4);
                 String date = cursor.getString(5);
                 String description = cursor.getString(6);
+                Log.e("DATE: ", date);
 
                 addRecord(new ListItem(id, petrolStations, distance, amountOfFuel, totalCost, date, description));
             }
