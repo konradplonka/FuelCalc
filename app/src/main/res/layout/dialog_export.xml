@@ -3,10 +3,10 @@
     android:layout_width="350dp" android:layout_height="wrap_content"
     android:background="@drawable/card_bg">
     <TextView
-        android:id="@+id/setFileName_textView"
+        android:id="@+id/export_header_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ustaw nazwę pliku"
+        android:text="@string/export"
         android:textColor="?attr/headerText"
         android:textSize="20sp"
         android:layout_marginLeft="16dp"
@@ -14,7 +14,7 @@
         android:textStyle="bold" />
     <EditText
         android:id="@+id/fileName_editText"
-        android:layout_below="@id/setFileName_textView"
+        android:layout_below="@id/export_header_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"

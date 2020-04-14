@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout android:layout_width="match_parent"
     android:id="@+id/item_container_relativeLayout"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:background="?attr/backgroundColor">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
 <LinearLayout
@@ -27,9 +32,10 @@
             android:layout_height="30dp"
             android:layout_marginRight="4dp"
             android:background="@drawable/button_rectangle_selector"
-            android:text="Koszty na os."
-            android:textSize="10dp"
-            android:textColor="#fff"
+            android:text="@string/cost_per_person_menu"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@drawable/button_rectangle_text_selector"
             android:layout_weight="1"/>
         <Button
             android:id="@+id/fuel_usage_button"
@@ -38,9 +44,10 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:background="@drawable/button_rectangle_selector"
-            android:text="Spalanie"
-            android:textSize="10dp"
-            android:textColor="#fff"
+            android:text="@string/fuel_consumption_menu"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@drawable/button_rectangle_text_selector"
             android:layout_weight="1"/>/>
         <Button
             android:id="@+id/range_button"
@@ -48,9 +55,10 @@
             android:layout_height="30dp"
             android:layout_marginLeft="4dp"
             android:background="@drawable/button_rectangle_selector"
-            android:text="Zasięg"
-            android:textSize="10dp"
-            android:textColor="#fff"
+            android:text="@string/range_menu"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@drawable/button_rectangle_text_selector"
             android:layout_weight="1"/>
 
 
@@ -60,7 +68,7 @@
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Dane"
+    android:text="@string/data"
     android:textColor="?attr/headerText"
     android:textSize="20sp"
     android:layout_marginLeft="16dp"
@@ -89,7 +97,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="Odległość [km]"
+            android:hint="@string/distance"
             android:inputType="numberDecimal"
             android:textAlignment="textStart"
             android:textSize="14sp"
@@ -108,7 +116,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="Cena za litr [zł]"
+            android:hint="@string/price_per_liter"
             android:inputType="numberDecimal"
             android:textAlignment="textStart"
             android:textSize="14sp"
@@ -128,7 +136,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="Zużycie paliwa [l/100km]"
+            android:hint="@string/fuel_consumption"
             android:inputType="numberDecimal"
             android:drawablePadding="16dp"
             android:textAlignment="textStart"
@@ -148,7 +156,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="Ilość osób"
+            android:hint="@string/amount_of_people"
             android:inputType="numberDecimal"
             android:textAlignment="textStart"
             android:textSize="14sp"
@@ -188,7 +196,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:drawableLeft="@null"
-            android:hint="Odległość [km]"
+            android:hint="@string/distance"
             android:inputType="numberDecimal"
             android:textAlignment="textStart"
             android:textSize="14sp"
@@ -207,7 +215,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="Cena za litr [zł]"
+            android:hint="@string/price_per_liter"
             android:inputType="numberDecimal"
             android:textAlignment="textStart"
             android:textSize="14sp"
@@ -226,7 +234,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="Ilość paliwa [l]"
+            android:hint="@string/amount_of_fuel"
             android:inputType="numberDecimal"
 
             android:textAlignment="textStart"
@@ -266,7 +274,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="Zużycie paliwa [l/100km]"
+            android:hint="@string/fuel_consumption"
             android:inputType="numberDecimal"
             android:textAlignment="textStart"
             android:textSize="14sp"
@@ -285,7 +293,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="Cena za litr [zł]"
+            android:hint="@string/price_per_liter"
             android:inputType="numberDecimal"
             android:textAlignment="textStart"
             android:textSize="14sp"
@@ -304,7 +312,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="Ilość paliwa [l]"
+            android:hint="@string/amount_of_fuel"
             android:inputType="numberDecimal"
             android:textAlignment="textStart"
             android:textSize="14sp"
@@ -325,12 +333,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Wyniki"
+        android:text="@string/results"
         android:textColor="?attr/headerText"
         android:textSize="20sp"
         android:layout_marginLeft="16dp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/costs_per_person_results_view"
@@ -368,7 +375,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="4dp"
-                        android:text="Koszt na osobę"
+                        android:text="@string/cost_per_person_header"
                         android:textStyle="bold"
                         android:textColor="#fe4901"
                         android:layout_toRightOf="@id/cost_per_person_imageView"
@@ -421,7 +428,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="4dp"
-                        android:text="Zużyte paliwa"
+                        android:text="@string/used_fuel_header"
                         android:textStyle="bold"
                         android:textColor="#fe4901"
                         android:layout_toRightOf="@id/fuel_usage_imageView"
@@ -467,7 +474,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="4dp"
-                        android:text="Całkowity koszt"
+                        android:text="@string/total_cost_header"
                         android:textStyle="bold"
                         android:textColor="#fe4901"
                         android:layout_toRightOf="@id/total_cost_imageView"
@@ -533,7 +540,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="4dp"
-                        android:text="Średnie spalanie"
+                        android:text="@string/average_fuel_consumption_header"
                         android:textStyle="bold"
                         android:textColor="#fe4901"
                         android:layout_toRightOf="@id/average_fuel_consumption_imageView"
@@ -579,7 +586,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="4dp"
-                        android:text="Całkowity koszt"
+                        android:text="@string/total_cost_header"
                         android:textStyle="bold"
                         android:textColor="#fe4901"
                         android:layout_toRightOf="@id/total_cost_fuel_consumption_imageView"
@@ -640,7 +647,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="4dp"
-                        android:text="Zasięg"
+                        android:text="@string/range_header"
                         android:textStyle="bold"
                         android:textColor="#fe4901"
                         android:layout_toRightOf="@id/range_imageView" />
@@ -685,7 +692,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="4dp"
-                        android:text="Całkowity koszt"
+                        android:text="@string/total_cost_header"
                         android:textStyle="bold"
                         android:textColor="#fe4901"
                         android:layout_toRightOf="@id/total_cost_range_imageView"
@@ -711,7 +718,7 @@
 
 
 </LinearLayout>
-
+</ScrollView>
 
 <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/calculate_floatingButton"
@@ -722,7 +729,5 @@
     android:layout_alignParentRight="true"
     android:layout_margin="@dimen/fab_margin"
     android:clickable="true"
-
-    android:src="@drawable/equal_sign_24dp"
-    />
+    android:src="@drawable/equal_sign_24dp" />
 </RelativeLayout>

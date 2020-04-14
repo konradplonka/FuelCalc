@@ -1,6 +1,7 @@
 package com.konradplonka.fuelcalculator.fragments;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,22 +69,18 @@ public class CalculatorTab extends Fragment {
                setVisibilityOfViews(1);
            }
        });
-
        fuelUsageButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                setVisibilityOfViews(2);
            }
        });
-
        rangeButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                setVisibilityOfViews(3);
            }
        });
-
-
 
 
        calculateButton.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +130,7 @@ public class CalculatorTab extends Fragment {
             rangeButton.setSelected(false);
 
 
+
             costsPerPersonGetDataView.setVisibility(View.VISIBLE);
             costsPerPersonResultsView.setVisibility(View.VISIBLE);
 
@@ -146,8 +144,10 @@ public class CalculatorTab extends Fragment {
         if(tab == 2){
             costsPerPersonButton.setSelected(false);
 
+
             fuelUsageButton.setSelected(true);
             fuelUsageButton.setPressed(false);
+
 
             rangeButton.setSelected(false);
 
@@ -165,10 +165,13 @@ public class CalculatorTab extends Fragment {
         if(tab == 3){
             costsPerPersonButton.setSelected(false);
 
+
             fuelUsageButton.setSelected(false);
+
 
             rangeButton.setSelected(true);
             rangeButton.setPressed(false);
+
 
 
 
@@ -301,6 +304,9 @@ public class CalculatorTab extends Fragment {
 
     }
 
+
+
+
     private boolean isEmptyField (EditText editText){
         boolean result = editText.getText().toString().length() <= 0;
         if (result)
@@ -315,5 +321,6 @@ public class CalculatorTab extends Fragment {
         return result;
 
     }
+
 
 }

@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,9 +32,6 @@ import static com.konradplonka.fuelcalculator.other.DatabaseHelper.EXPORT_DICTIO
 public class BackupDialog extends DialogFragment {
     private Button importButton;
     private Button exportButton;
-
-    OnBackupDialogListener listener;
-
 
     @Nullable
     @Override
@@ -63,6 +61,7 @@ public class BackupDialog extends DialogFragment {
     }
 
     private void onExportButtonClick() {
+
         exportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,28 +81,4 @@ public class BackupDialog extends DialogFragment {
 
     }
 
-
-
-
-    public interface OnBackupDialogListener{
-        void refreshAllRecyclerView();
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        try{
-            listener = (OnBackupDialogListener) getTargetFragment();
-        }catch (ClassCastException e){
-            Log.e(TAG, "onAttach: ClassCastException: " +e.getMessage());
-        }
-
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        listener = null;
-        super.onDetach();
-    }
 }

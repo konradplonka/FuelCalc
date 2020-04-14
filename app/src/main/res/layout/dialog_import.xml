@@ -10,13 +10,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Opcje importu"
+            android:text="@string/import_"
             android:textColor="?attr/headerText"
             android:textSize="20sp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:textStyle="bold" />
         <RadioGroup
+            android:id="@+id/import_radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -29,7 +30,7 @@
                 android:padding="8dp"
                 android:layout_gravity="center"
                 android:background="@drawable/radio_button_selector"
-                android:text="Chcę usunąć isnitejącą bazę danych"
+                android:text="@string/delete_existing_database_and_add_to_new"
                 android:textColor="@color/colorAccent"
                 android:button="@android:color/transparent"/>
 
@@ -41,14 +42,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_gravity="center"
                 android:background="@drawable/radio_button_selector"
-                android:text="Chcę dodać do istniejącej bazy danych"
+                android:text="@string/add_to_existing_database"
                 android:textColor="@color/colorAccent"
                 android:button="@android:color/transparent"/>
         </RadioGroup>
 
+
     </LinearLayout>
-
-
     <ImageButton
         android:id="@+id/import_imageButton"
         android:layout_width="40dp"
@@ -61,6 +61,43 @@
         android:layout_marginRight="16dp"
         android:textColor="#fff"
         android:src="@drawable/done_icon_24dp" />
+
+    <LinearLayout
+        android:id="@+id/progressBar_linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/progress_bar_bg"
+        android:layout_below="@id/import_linearLayout"
+        android:layout_alignParentRight="true"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/progressBar_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zakończono!"
+            android:textColor="#fff"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"/>
+
+        <ImageView
+            android:id="@+id/progressBar_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/done_icon_24dp"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+
 
 
 </RelativeLayout>

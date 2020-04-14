@@ -2,8 +2,8 @@
 
     <!-- Light theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">#FAFAFA</item>
+        <item name="colorPrimaryDark">#f3f2f7</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="backgroundColor">#f3f2f7</item>
         <item name="cardBackgroundColor">#ffffff</item>

@@ -36,10 +36,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private Context context;
     private FragmentManager fragmentManager;
 
+
+
+
     public MyAdapter(List<ListItem> listItems, Context context, FragmentManager fragmentManager) {
         this.listItems = listItems;
         this.context = context;
         this.fragmentManager = fragmentManager;
+
 
     }
 
@@ -159,6 +163,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     public void addRecord(ListItem listItem){
         listItems.add(listItem);
         notifyDataSetChanged();
+
 
     }
     private void deleteRecord(ListItem listItem){

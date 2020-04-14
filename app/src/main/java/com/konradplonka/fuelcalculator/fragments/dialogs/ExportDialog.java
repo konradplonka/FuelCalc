@@ -35,6 +35,7 @@ public class ExportDialog extends DialogFragment {
     private TextView progressBarTextView;
     private ImageView progressBarImageView;
     private EditText fileNameEditText;
+    private View dividerFileName;
 
 
     @Nullable
@@ -70,7 +71,7 @@ public class ExportDialog extends DialogFragment {
         progressBarTextView = (TextView) view.findViewById(R.id.progressBar_textView);
         progressBarImageView = (ImageView) view.findViewById(R.id.progressBar_imageView);
         fileNameEditText = (EditText) view.findViewById(R.id.fileName_editText);
-
+        dividerFileName = (View) view.findViewById(R.id.divider_fileName);
 
     }
 
@@ -79,9 +80,15 @@ public class ExportDialog extends DialogFragment {
         progressBarImageView.setAnimation(getAnimation());
         progressBarTextView.setAnimation(getAnimation());
 
+
         progressBarLinearLayout.setVisibility(View.VISIBLE);
         progressBarImageView.setVisibility(View.VISIBLE);
         progressBarTextView.setText("Zakończono!");
+
+
+        fileNameEditText.setVisibility(View.GONE);
+        dividerFileName.setVisibility(View.GONE);
+
 
     }
 

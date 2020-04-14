@@ -138,15 +138,6 @@ public class SetStationDialog extends DialogFragment{
         }
 
     }
-//    private ArrayList<PetrolStation> getPetrolStations(){
-//        ArrayList <PetrolStation> petrolStationsList = new ArrayList<>();
-//
-//        petrolStationsList.add(new PetrolStation(PetrolStations.UNKNOWN, R.drawable.oval_unknown, R.drawable.unknown));
-//        petrolStationsList.add(new PetrolStation(PetrolStations.ORLEN, R.drawable.oval_orlen, R.drawable.orlen));
-//        petrolStationsList.add(new PetrolStation(PetrolStations.SHELL, R.drawable.oval_shell, R.drawable.shell));
-//        petrolStationsList.add(new PetrolStation(PetrolStations.BP, R.drawable.oval_bp, R.drawable.bp));
-//        return petrolStationsList;
-//    }
 
     private int getDpSize(int dp){
         float scale = getResources().getDisplayMetrics().density;

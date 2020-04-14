@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.konradplonka.fuelcalculator.R;
 import com.konradplonka.fuelcalculator.fragments.CalculatorTab;
 import com.konradplonka.fuelcalculator.fragments.DictionaryTab;
 import com.konradplonka.fuelcalculator.fragments.dialogs.AddRecordDialog;
 import com.konradplonka.fuelcalculator.fragments.dialogs.EditRecordDialog;
+import com.konradplonka.fuelcalculator.fragments.dialogs.ImportDialog;
 import com.konradplonka.fuelcalculator.fragments.dialogs.SettingsDialog;
 import com.konradplonka.fuelcalculator.other.DatabaseHelper;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
@@ -21,12 +24,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.FileNotFoundException;
-
-import static android.content.ContentValues.TAG;
-
 
 public class MainActivity extends AppCompatActivity implements EditRecordDialog.OnEditRecordDialogListener, SettingsDialog.OnSettingsDialogListener {
+    CalculatorTab calculatorTab;
     DictionaryTab dictionaryTab;
     public boolean isDark;
     @Override
@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements EditRecordDialog.
 
 
 
-
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements EditRecordDialog.
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    CalculatorTab calculatorTab = new CalculatorTab();
+                    calculatorTab = new CalculatorTab();
                     return calculatorTab;
                 case 1:
                     dictionaryTab = new DictionaryTab();
@@ -129,18 +128,10 @@ public class MainActivity extends AppCompatActivity implements EditRecordDialog.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK){
-            String backupPath = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-            try{
-                DatabaseHelper databaseHelper = new DatabaseHelper(getBaseContext());
-                databaseHelper.importDatabase(backupPath);
-                dictionaryTab.loadDatabase();
 
-            }
-            catch (FileNotFoundException e){
-                e.printStackTrace();
-            }
-        }
+        Fragment importDialog = getSupportFragmentManager().findFragmentByTag("ImportDialog");
+        importDialog.onActivityResult(requestCode, resultCode, data);
+
     }
 
 

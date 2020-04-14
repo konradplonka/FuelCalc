@@ -88,7 +88,6 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
                 SetStationDialog setStationDialog = new SetStationDialog();
                 setStationDialog.show(getFragmentManager(), "setStation");
                 setStationDialog.setTargetFragment(AddRecordDialog.this, 1);
-//
             }
         });
     }

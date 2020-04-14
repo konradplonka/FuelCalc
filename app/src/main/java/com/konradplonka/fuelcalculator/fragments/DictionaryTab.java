@@ -1,13 +1,17 @@
 package com.konradplonka.fuelcalculator.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,18 +28,16 @@ import com.konradplonka.fuelcalculator.other.DatabaseHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddRecordDialogListener{
+public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddRecordDialogListener, ImportDialog.OnImportDialogListener {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<ListItem> list;
-
     private DatabaseHelper db;
-
-
     private FloatingActionButton addRecordFabButton;
     private FloatingActionButton backupFabButton;
     private FloatingActionButton settingsFabButton;
+
 
 
     @Nullable
@@ -56,18 +58,20 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
 
 
 
+
+
         loadDatabase();
         initializeElements(view);
         handleFabButtons();
 
-        addRecord();
-        openSettings();
-        openBackup();
+        OnAddRecordClick();
+        OnSettingsClick();
+        OnBackupClick();
 
         return view;
     }
 
-    private void addRecord() {
+    private void OnAddRecordClick() {
         addRecordFabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,44 +79,9 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
                 addRecordFragment.show(getFragmentManager(), "AddRecordDialog");
                 addRecordFragment.setTargetFragment(DictionaryTab.this, 1);
             }
-//                addRecordDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                addRecordDialog.show();
-//
-//                final ImageView stationImageView = (ImageView) addRecordDialog.findViewById(R.id.station_addRecord_imageView);
-//                final Button setStationButton = (Button) addRecordDialog.findViewById(R.id.set_station_button);
-//                final EditText distanceEditText = (EditText)addRecordDialog.findViewById(R.id.distance_addRecord_editText);
-//                final EditText amountOfFuelEditText = (EditText)addRecordDialog.findViewById(R.id.distance_addRecord_editText);
-//                final EditText costEditText = (EditText)addRecordDialog.findViewById(R.id.cost_addRecord_editText);
-//                final RadioButton totalCostRadioButton = (RadioButton) addRecordDialog.findViewById(R.id.total_cost_radioButton);
-//                final RadioButton pricePerLRadioButton = (RadioButton) addRecordDialog.findViewById(R.id.price_per_l_radioButton);
-//                final EditText dateEditText = (EditText) addRecordDialog.findViewById(R.id.date_addRecord_editText);
-//                final EditText descriptionEditText = (EditText) addRecordDialog.findViewById(R.id.description_addRecord_editText);
-//                ImageButton addRecordButton = (ImageButton) addRecordDialog.findViewById(R.id.add_record_button);
-//
-//                handleRadioButtons(addRecordDialog, view, costEditText, totalCostRadioButton, pricePerLRadioButton);
-//                handleDateEditText(dateEditText);
-//
-//
-//                setStationButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        setStation(stationImageView);
-//                    }
-//                });
-//
-//                addRecordButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        addRecordToList(stationImageView, distanceEditText, amountOfFuelEditText, costEditText, totalCostRadioButton, pricePerLRadioButton, dateEditText, descriptionEditText, adapter);
-//                        adapter.addRecordsFromDatabase();
-//                        addRecordDialog.dismiss();
-//                    }
-//                });
-//
-//            }
        });
     }
-    private void openSettings(){
+    private void OnSettingsClick(){
         settingsFabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +91,7 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
             }
         });
     }
-    private void openBackup(){
+    private void OnBackupClick(){
         backupFabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,5 +148,11 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
         Toast.makeText(getContext(), "Zaktualizowano!", Toast.LENGTH_SHORT);
     }
 
+
+
+    @Override
+    public void refreshRecyclerViewAfterImport() {
+        loadDatabase();
+    }
 
 }

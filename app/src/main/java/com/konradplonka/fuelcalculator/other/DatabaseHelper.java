@@ -95,12 +95,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public SQLiteCursor getData(){
+    public SQLiteCursor getData() {
         SQLiteDatabase db = this.getReadableDatabase();
         SQLiteCursor cursor = (SQLiteCursor) db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
 
         return cursor;
+    }
 
     public boolean exportDatabase(String fileName, Context context){
         File directory = new File(context.getExternalFilesDir(null) + "/" + EXPORT_DICTIONARY);
