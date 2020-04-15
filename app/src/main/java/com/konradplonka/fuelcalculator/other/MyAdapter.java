@@ -118,7 +118,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(context, holder.optionsImageButton);
-                popupMenu.inflate(R.menu.options_menu);
+                popupMenu.inflate(R.menu.item_options);
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -209,19 +209,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         if(cursor.getCount() > 0){
             while(cursor.moveToNext()){
                 int id = cursor.getInt(0);
-                PetrolStations petrolStations = PetrolStations.valueOf(cursor.getString(1));
-                int distance = cursor.getInt(2);
-                double amountOfFuel = cursor.getDouble(3);
-                double totalCost = cursor.getDouble(4);
-                String date = cursor.getString(5);
-                String description = cursor.getString(6);
+                int vehicleId = cursor.getInt(1);
+                PetrolStations petrolStations = PetrolStations.valueOf(cursor.getString(2));
+                int distance = cursor.getInt(3);
+                double amountOfFuel = cursor.getDouble(4);
+                double totalCost = cursor.getDouble(5);
+                String date = cursor.getString(6);
+                String description = cursor.getString(7);
                 Log.e("DATE: ", date);
 
-                addRecord(new ListItem(id, petrolStations, distance, amountOfFuel, totalCost, date, description));
+                addRecord(new ListItem(id, vehicleId, petrolStations, distance, amountOfFuel, totalCost, date, description));
             }
         }
         sortData();
     }
+
 
     public void addLatestRecordFromDatabase(){
         DatabaseHelper db = new DatabaseHelper(context);
@@ -229,14 +231,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         cursor.moveToLast();
 
         int id = cursor.getInt(0);
-        PetrolStations petrolStations = PetrolStations.valueOf(cursor.getString(1));
-        int distance = cursor.getInt(2);
-        double amountOfFuel = cursor.getDouble(3);
-        double totalCost = cursor.getDouble(4);
-        String date = cursor.getString(5);
-        String description = cursor.getString(6);
+        int vehicleId = cursor.getInt(1);
+        PetrolStations petrolStations = PetrolStations.valueOf(cursor.getString(2));
+        int distance = cursor.getInt(3);
+        double amountOfFuel = cursor.getDouble(4);
+        double totalCost = cursor.getDouble(5);
+        String date = cursor.getString(6);
+        String description = cursor.getString(7);
 
-        addRecord(new ListItem(id, petrolStations, distance, amountOfFuel, totalCost, date, description));
+        addRecord(new ListItem(id, vehicleId, petrolStations, distance, amountOfFuel, totalCost, date, description));
         notifyItemInserted(getItemCount()+1);
 
     }

@@ -132,7 +132,7 @@ public class ImportDialog extends DialogFragment {
     private Animation getAnimation(){
         return AnimationUtils.loadAnimation(getContext(), R.anim.fade_in_animation);
     }
-    @Override
+/*    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK){
@@ -149,7 +149,7 @@ public class ImportDialog extends DialogFragment {
         }
 
 
-    }
+    }*/
     public interface OnImportDialogListener{
         void refreshRecyclerViewAfterImport();
     }

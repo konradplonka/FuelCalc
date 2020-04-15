@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="car_values">
+        <item>Ford Focus</item>
+        <item>Peugeot 206</item>
+    </string-array>
+</resources>

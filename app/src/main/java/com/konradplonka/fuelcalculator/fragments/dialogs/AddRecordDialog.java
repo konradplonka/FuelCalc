@@ -43,7 +43,9 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
     private EditText descriptionEditText;
     private ImageButton addRecordButton;
     private DatabaseHelper db;
+    private int vehicleId;
     private OnAddRecordDialogListener listener;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,6 +53,8 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         db = new DatabaseHelper(getContext());
+        savedInstanceState = getArguments();
+        vehicleId = savedInstanceState.getInt("vehicleId");
 
         initializeAddRecordDialogElements(view);
         handleCostRadioButtons();
@@ -61,6 +65,7 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
 
         return view;
     }
+
 
     private void handleDateEditText() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -152,6 +157,7 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
                     if(!isEmptyField(distanceEditText) && !isNull(distanceEditText) && !isEmptyField(amountOfFuelEditText) && !isNull(amountOfFuelEditText) && !isEmptyField(costEditText) && !isNull(costEditText)) {
                         if (totalCostRadioButton.isChecked()) {
                             db.addData(
+                                    vehicleId,
                                     stationImageView.getTag().toString(),
                                     Integer.parseInt(distanceEditText.getText().toString()),
                                     Double.parseDouble(amountOfFuelEditText.getText().toString()),
@@ -160,7 +166,7 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
                                     descriptionEditText.getText().toString()
                             );
                         } else {
-                            db.addData(
+                            db.addData(vehicleId,
                                     stationImageView.getTag().toString(),
                                     Integer.parseInt(distanceEditText.getText().toString()),
                                     Double.parseDouble(amountOfFuelEditText.getText().toString()),

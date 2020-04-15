@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class ListItem {
     private int id;
+    private int vehicleId;
     private PetrolStations petrolStations;
     private int distance;
     private double amountOfFuel;
@@ -14,8 +15,9 @@ public class ListItem {
     private String date;
     private String description;
 
-    public ListItem(int id, PetrolStations petrolStations, int distance, double amountOfFuel, double totalCost, String date, String description) {
+    public ListItem(int id, int vehicleId, PetrolStations petrolStations, int distance, double amountOfFuel, double totalCost, String date, String description) {
         this.id = id;
+        this.vehicleId = vehicleId;
         this.petrolStations = petrolStations;
         this.distance = distance;
         this.amountOfFuel = amountOfFuel;
@@ -27,6 +29,10 @@ public class ListItem {
     public int getId() {
         return id;
     }
+    public int getVehicleId() {
+        return vehicleId;
+    }
+
 
     public void setId(int id) {
         this.id = id;
