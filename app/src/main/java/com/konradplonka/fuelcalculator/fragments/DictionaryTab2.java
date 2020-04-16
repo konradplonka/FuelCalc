@@ -38,7 +38,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddRecordDialogListener, ImportDialog.OnImportDialogListener, AddVehicleDialog.OnAddVehicleDialogListener {
+public class DictionaryTab2 extends Fragment implements AddRecordDialog.OnAddRecordDialogListener, ImportDialog.OnImportDialogListener, AddVehicleDialog.OnAddVehicleDialogListener {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private ArrayAdapter<String> vehicleAdapter;
@@ -168,7 +168,7 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
     private void addVehicle() {
         AddVehicleDialog addVehicleDialog = new AddVehicleDialog();
         addVehicleDialog.show(getFragmentManager(), "AddVehicleDialog");
-        addVehicleDialog.setTargetFragment(DictionaryTab.this, 1);
+        addVehicleDialog.setTargetFragment(DictionaryTab2.this, 1);
     }
 
     private void initializeSpinner() {
@@ -187,7 +187,7 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
                 AddRecordDialog addRecordFragment = new AddRecordDialog();
                 addRecordFragment.setArguments(bundle);
                 addRecordFragment.show(getFragmentManager(), "AddRecordDialog");
-                addRecordFragment.setTargetFragment(DictionaryTab.this, 1);
+                addRecordFragment.setTargetFragment(DictionaryTab2.this, 1);
 
 
             }
@@ -209,7 +209,7 @@ public class DictionaryTab extends Fragment implements AddRecordDialog.OnAddReco
             public void onClick(View v) {
                 BackupDialog backupDialog = new BackupDialog();
                 backupDialog.show(getFragmentManager(), "BackupDialog");
-                backupDialog.setTargetFragment(DictionaryTab.this, 1);
+                backupDialog.setTargetFragment(DictionaryTab2.this, 1);
             }
         });
     }
