@@ -86,12 +86,15 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
         addRecordFabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("vehicleId", selectedVehicleId);
-                AddRecordDialog addRecordFragment = new AddRecordDialog();
-                addRecordFragment.setArguments(bundle);
-                addRecordFragment.show(getFragmentManager(), "AddRecordDialog");
-                addRecordFragment.setTargetFragment(DictionaryTab.this, 1);
+                if(vehiclesListString.size() >1){
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("vehicleId", selectedVehicleId);
+                    AddRecordDialog addRecordFragment = new AddRecordDialog();
+                    addRecordFragment.setArguments(bundle);
+                    addRecordFragment.show(getFragmentManager(), "AddRecordDialog");
+                    addRecordFragment.setTargetFragment(DictionaryTab.this, 1);
+                }
+                else Toast.makeText(getContext(), "Aby dodać rekord musisz utworzyć profil samochodu!", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -217,9 +220,19 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
         String selectedItem = spinner.getSelectedItem().toString();
         for(VehicleListItem vehicle: vehiclesList){
             if(selectedItem.equals(vehicle.toString())){
-                vehiclesListString.remove(selectedItem);
-                vehiclesList.remove(vehicle);
-                db.deleteVehicle(vehicle.getId());
+                if(db.deleteVehicle(vehicle.getId()) &&  db.deleteSpecifyVehicleData(vehicle.getId())){
+                    saveSelectedVehicleStatePref(0,0);
+                    vehiclesListString.remove(selectedItem);
+                    vehiclesList.remove(vehicle);
+                    adapter.clearList();
+                    adapter.notifyDataSetChanged();
+
+                    Toast.makeText(getContext(), "Usunięto pojazd!", Toast.LENGTH_SHORT).show();
+                }
+                else Toast.makeText(getContext(), "Błąd w usuwaniu pojazdu!", Toast.LENGTH_SHORT).show();
+
+
+
                 break;
             }
         }
@@ -315,5 +328,9 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
             }
         });
 
+    }
+
+    public void updateItemData(int position, String stationTag, int distance, double amountOfFuel, double totalCost, String date, String description){
+        adapter.updateRecord(position, stationTag, distance, amountOfFuel, totalCost, date, description);
     }
 }

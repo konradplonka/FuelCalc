@@ -107,6 +107,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+    public boolean deleteSpecifyVehicleData(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        if(db.delete(REFUELING_TABLE_NAME, "VehicleId= ?",  new String[]{String.valueOf(id)}) >0){
+            return true;
+        }
+        return false;
+    }
 
     public boolean updateData(int id, String petrolStation, int distance, double amountOfFuel, double totalCost, String date, String description){
         SQLiteDatabase db=this.getWritableDatabase();

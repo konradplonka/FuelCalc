@@ -19,7 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-public class MainActivity extends AppCompatActivity implements SettingsDialog.OnSettingsDialogListener {
+public class MainActivity extends AppCompatActivity implements SettingsDialog.OnSettingsDialogListener, EditRecordDialog.OnEditRecordDialogListener {
     CalculatorTab calculatorTab;
     DictionaryTab dictionaryTab;
     public boolean isDark;
@@ -51,10 +51,11 @@ public class MainActivity extends AppCompatActivity implements SettingsDialog.On
 
     }
 
-//    @Override
-//    public void refreshItem(int position, String stationTag, int distance, double amountOfFuel, double totalCost, String date, String description) {
-//        dictionaryTab.updateItemData(position, stationTag, distance, amountOfFuel, totalCost, date, description);
-//    }
+    @Override
+    public void refreshItem(int position, String stationTag, int distance, double amountOfFuel, double totalCost, String date, String description) {
+        dictionaryTab.updateItemData(position, stationTag, distance, amountOfFuel, totalCost, date, description);
+
+    }
 
     @Override
     public void setNightMode() {

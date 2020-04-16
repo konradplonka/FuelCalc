@@ -711,6 +711,7 @@
 
             </androidx.cardview.widget.CardView>
 
+
         </LinearLayout>
 
 
@@ -729,5 +730,20 @@
     android:layout_alignParentRight="true"
     android:layout_margin="@dimen/fab_margin"
     android:clickable="true"
+    card_view:fabSize="mini"
     android:src="@drawable/equal_sign_24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/calculate_floatingButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:clickable="true"
+        card_view:fabSize="mini"
+        android:backgroundTint="#F44336"
+        card_view:borderWidth="0dp"
+        android:src="@drawable/clear_icon_18dp" />
+
+
 </RelativeLayout>

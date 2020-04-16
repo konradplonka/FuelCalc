@@ -271,6 +271,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         }
         listItems = listItemsFiltered;
 
+
+    }
+
+    public void clearList(){
+        for(ListItem item: listItems){
+            listItemsFull.remove(item);
+        }
+        listItems.clear();
     }
     @Override
     public int getItemCount() {
