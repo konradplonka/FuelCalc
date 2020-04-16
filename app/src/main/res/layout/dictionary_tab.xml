@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor">
     <RelativeLayout
-        android:id="@+id/car_selector_spinner_linearLayout"
+        android:id="@+id/vehicle_selector_spinner_RelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/card_bg"
@@ -43,7 +43,7 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/car_selector_spinner_linearLayout"
+        android:layout_below="@id/vehicle_selector_spinner_RelativeLayout"
         android:layout_marginTop="-2dp"
         android:scrollbars="vertical" />
 

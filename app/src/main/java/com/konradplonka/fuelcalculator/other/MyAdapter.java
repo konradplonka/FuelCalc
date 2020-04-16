@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.konradplonka.fuelcalculator.R;
+import com.konradplonka.fuelcalculator.fragments.DictionaryTab;
 import com.konradplonka.fuelcalculator.fragments.dialogs.EditRecordDialog;
 
 import java.text.DecimalFormat;
@@ -33,14 +34,21 @@ import java.util.Locale;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private List<ListItem> listItems;
+
+    public void setListItemsFull(List<ListItem> listItemsFull) {
+        this.listItemsFull = listItemsFull;
+    }
+
+    private List<ListItem> listItemsFull;
     private Context context;
     private FragmentManager fragmentManager;
 
 
 
 
-    public MyAdapter(List<ListItem> listItems, Context context, FragmentManager fragmentManager) {
+    public MyAdapter(List<ListItem> listItems , Context context, FragmentManager fragmentManager) {
         this.listItems = listItems;
+        this.listItemsFull = listItems;
         this.context = context;
         this.fragmentManager = fragmentManager;
 
@@ -150,6 +158,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                                 editRecordDialog.show(fragmentManager,"EditRecord");
 
 
+
                         }
                         return false;
                     }
@@ -161,7 +170,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     }
 
     public void addRecord(ListItem listItem){
-        listItems.add(listItem);
+        listItemsFull.add(listItem);
         notifyDataSetChanged();
 
 
@@ -169,6 +178,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private void deleteRecord(ListItem listItem){
        int position = listItems.indexOf(listItem);
        listItems.remove(position);
+       listItemsFull.remove(listItem);
        notifyItemRemoved(position);
     }
     public void updateRecord(int position, String stationTag, int distance, double amountOfFuel, double totalCost, String date, String description){
@@ -222,6 +232,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             }
         }
         sortData();
+
+
     }
 
 
@@ -243,6 +255,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         notifyItemInserted(getItemCount()+1);
 
     }
+
+    public void filterDataByVehicleId(int vehicleId){
+        Log.e("Filtrowanie", String.valueOf(vehicleId));
+        Log.e("Filtrowanie", String.valueOf(listItemsFull.size()));
+        List<ListItem> listItemsFiltered = new ArrayList<>();
+            for(ListItem item: listItemsFull){
+                if(item.getVehicleId() == vehicleId){
+                    listItemsFiltered.add(item);
+                    Log.e("VehicleId: ", String.valueOf(item.getVehicleId()));
+                }
+
+
+
+        }
+        listItems = listItemsFiltered;
+
+    }
     @Override
     public int getItemCount() {
         return listItems.size();
@@ -252,6 +281,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         Collections.sort(listItems, ListItem.BY_DATE_DESCENDING);
         notifyDataSetChanged();
     }
+
 
 
 

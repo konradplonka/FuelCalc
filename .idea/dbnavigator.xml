@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -23,25 +23,22 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="7cf4d25e-c48e-4085-94d2-0553d09dc19a">
-        <schema name="main" object-types="dataset trigger, view, constraint, column, table, index" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="7cf4d25e-c48e-4085-94d2-0553d09dc19a">
-      <console name="Connection" type="STANDARD" schema="" session="Main" />
+    <connection id="3cf08fd7-2d3c-4047-84f2-70d231b1bf69">
+      <console name="Connection" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="7cf4d25e-c48e-4085-94d2-0553d09dc19a" />
+    <connection id="3cf08fd7-2d3c-4047-84f2-70d231b1bf69" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="7cf4d25e-c48e-4085-94d2-0553d09dc19a" dataset="main.VehiclesData" active-filter-id="" />
+    <filter-actions connection-id="3cf08fd7-2d3c-4047-84f2-70d231b1bf69" dataset="main.RefuelingData" active-filter-id="" />
+    <filter-actions connection-id="3cf08fd7-2d3c-4047-84f2-70d231b1bf69" dataset="main.VehiclesData" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -66,7 +63,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="7cf4d25e-c48e-4085-94d2-0553d09dc19a" active="true">
+      <connection id="3cf08fd7-2d3c-4047-84f2-70d231b1bf69" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -81,7 +78,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="C:\Users\konra\Desktop\FuelCalculator.db" schema="main" />
+            <file path="C:\Users\konra\Desktop\FuelCalculator1.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
