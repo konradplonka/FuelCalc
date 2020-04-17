@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item1"
+        android:title="Kalkulator"
+        android:icon="@drawable/calculator_menu_icon_24dp" />
+
+    <item
+        android:id="@+id/item2"
+        android:title="Dziennik"
+        android:icon="@drawable/dictionary_menu_icon_24dp"/>
+
+    <item
+        android:id="@+id/item3"
+        android:title="Ustawienia"
+        android:icon="@drawable/settings_icon_24dp"/>
+</menu>
