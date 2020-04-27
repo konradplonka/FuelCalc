@@ -1,749 +1,136 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout android:layout_width="match_parent"
-    android:id="@+id/item_container_relativeLayout"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/backgroundColor">
-
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp">
-        <Button
-            android:id="@+id/costs_per_person_button"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp">
+
+
+        <LinearLayout
+            android:id="@+id/cost_per_person_button"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
-            android:background="@drawable/button_rectangle_selector"
-            android:text="@string/cost_per_person_menu"
-            android:textSize="12sp"
-            android:fontFamily="sans-serif"
-            android:textColor="@drawable/button_rectangle_text_selector"
-            android:layout_weight="1"/>
-        <Button
-            android:id="@+id/fuel_usage_button"
+            android:layout_weight="1"
+            android:background="@drawable/card_bg"
+            android:backgroundTint="#94c2f1"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="4dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/card_bg"
+                android:backgroundTint="#5CA5F0"
+                android:padding="8dp"
+                android:src="@drawable/ic_user"
+                android:tint="#fff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/cost_per_person_menu"
+                android:textColor="#fff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fuel_consumption_button"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:background="@drawable/button_rectangle_selector"
-            android:text="@string/fuel_consumption_menu"
-            android:textSize="12sp"
-            android:fontFamily="sans-serif"
-            android:textColor="@drawable/button_rectangle_text_selector"
-            android:layout_weight="1"/>/>
-        <Button
+            android:layout_weight="1"
+            android:background="@drawable/card_bg"
+            android:backgroundTint="#f7c480"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="4dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/card_bg"
+                android:backgroundTint="#F5A740"
+                android:padding="8dp"
+                android:src="@drawable/ic_fuel_consumption"
+                android:tint="#fff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/fuel_consumption_menu"
+                android:textColor="#fff" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/range_button"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:background="@drawable/button_rectangle_selector"
-            android:text="@string/range_menu"
-            android:textSize="12sp"
-            android:fontFamily="sans-serif"
-            android:textColor="@drawable/button_rectangle_text_selector"
-            android:layout_weight="1"/>
-
-
-    </LinearLayout>
-
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/data"
-    android:textColor="?attr/headerText"
-    android:textSize="20sp"
-    android:layout_marginLeft="16dp"
-    android:textStyle="bold" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/costs_per_person_get_data_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        card_view:cardCornerRadius="16dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:contentPadding="10dp"
-        card_view:cardElevation="0dp"
-        card_view:cardBackgroundColor="?attr/cardBackgroundColor">
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/distance_price_per_person_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:background="@null"
-            android:hint="@string/distance"
-            android:inputType="numberDecimal"
-            android:textAlignment="textStart"
-            android:textSize="14sp"
-            android:textColor="?attr/contentText"
-            android:textColorHint="?attr/contentText"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:background="?attr/dividerText"/>
+            android:background="@drawable/card_bg"
+            android:backgroundTint="#8DC0A5"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="4dp">
 
-        <EditText
-            android:id="@+id/fuel_price_price_per_person_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="@string/price_per_liter"
-            android:inputType="numberDecimal"
-            android:textAlignment="textStart"
-            android:textSize="14sp"
-            android:textColor="?attr/contentText"
-            android:textColorHint="?attr/contentText"/>
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:background="?attr/dividerText"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/card_bg"
+                android:backgroundTint="#1BB864"
+                android:padding="8dp"
+                android:src="@drawable/ic_range"
+                android:tint="#fff" />
 
-        <EditText
-            android:id="@+id/fuel_consumption_price_per_person_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="@string/fuel_consumption"
-            android:inputType="numberDecimal"
-            android:drawablePadding="16dp"
-            android:textAlignment="textStart"
-            android:textSize="14sp"
-            android:textColor="?attr/contentText"
-            android:textColorHint="?attr/contentText"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:background="?attr/dividerText"/>
-
-        <EditText
-            android:id="@+id/number_of_people_price_per_person_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="@string/amount_of_people"
-            android:inputType="numberDecimal"
-            android:textAlignment="textStart"
-            android:textSize="14sp"
-            android:textColor="?attr/contentText"
-            android:textColorHint="?attr/contentText"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:background="?attr/dividerText"/>
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/range_menu"
+                android:textColor="#fff" />
         </LinearLayout>
-</androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/fuel_consumption_get_data_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        card_view:cardCornerRadius="16dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:contentPadding="10dp"
-        card_view:cardElevation="0dp"
-        card_view:cardBackgroundColor="?attr/cardBackgroundColor">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/distance_fuel_consumption_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:drawableLeft="@null"
-            android:hint="@string/distance"
-            android:inputType="numberDecimal"
-            android:textAlignment="textStart"
-            android:textSize="14sp"
-            android:textColor="?attr/contentText"
-            android:textColorHint="?attr/contentText"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:background="?attr/dividerText"/>
-
-        <EditText
-            android:id="@+id/fuel_price_fuel_consumption_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="@string/price_per_liter"
-            android:inputType="numberDecimal"
-            android:textAlignment="textStart"
-            android:textSize="14sp"
-            android:textColor="?attr/contentText"
-            android:textColorHint="?attr/contentText"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:background="?attr/dividerText"/>
-
-        <EditText
-            android:id="@+id/amount_of_fuel_fuel_consumption_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="@string/amount_of_fuel"
-            android:inputType="numberDecimal"
-
-            android:textAlignment="textStart"
-            android:textSize="14sp"
-            android:textColor="?attr/contentText"
-            android:textColorHint="?attr/contentText"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:background="?attr/dividerText"/>
-
-
-    </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/range_get_data_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        card_view:cardCornerRadius="16dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:contentPadding="10dp"
-        card_view:cardElevation="0dp"
-        card_view:cardBackgroundColor="?attr/cardBackgroundColor">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/fuel_consumption_range_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="@string/fuel_consumption"
-            android:inputType="numberDecimal"
-            android:textAlignment="textStart"
-            android:textSize="14sp"
-            android:textColor="?attr/contentText"
-            android:textColorHint="?attr/contentText"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:background="?attr/dividerText"/>
-
-        <EditText
-            android:id="@+id/fuel_price_range_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="@string/price_per_liter"
-            android:inputType="numberDecimal"
-            android:textAlignment="textStart"
-            android:textSize="14sp"
-            android:textColor="?attr/contentText"
-            android:textColorHint="?attr/contentText"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:background="?attr/dividerText"/>
-
-        <EditText
-            android:id="@+id/amount_of_fuel_range_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="@string/amount_of_fuel"
-            android:inputType="numberDecimal"
-            android:textAlignment="textStart"
-            android:textSize="14sp"
-            android:textColor="?attr/contentText"
-            android:textColorHint="?attr/contentText"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:background="?attr/dividerText"/>
-
-
-    </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-    <TextView
-        android:id="@+id/results_text_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/results"
-        android:textColor="?attr/headerText"
-        android:textSize="20sp"
-        android:layout_marginLeft="16dp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:id="@+id/costs_per_person_results_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            card_view:cardCornerRadius="16dp"
-
-            card_view:cardUseCompatPadding="true"
-            card_view:contentPadding="10dp"
-            card_view:cardElevation="0dp"
-            card_view:cardBackgroundColor="?attr/cardBackgroundColor">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/cost_per_person_imageView"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/cost_per_person_icon_18dp"
-                        android:layout_alignParentLeft="true"/>
-                    <TextView
-                        android:id="@+id/cost_per_person_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="4dp"
-                        android:text="@string/cost_per_person_header"
-                        android:textStyle="bold"
-                        android:textColor="#fe4901"
-                        android:layout_toRightOf="@id/cost_per_person_imageView"
-                        />
-                    <TextView
-                        android:id="@+id/cost_per_person_result_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="0.00 zł"
-                        android:textColor="?attr/contentText"
-                        android:textSize="24sp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/cost_per_person_textView"/>
-                </RelativeLayout>
-
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="10dp"
-                android:layout_weight="1"
-                card_view:cardElevation="0dp"
-                card_view:cardBackgroundColor="?attr/cardBackgroundColor">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/fuel_usage_imageView"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/fuel_usage_icon_18dp"
-                        android:layout_alignParentLeft="true"/>
-                    <TextView
-                        android:id="@+id/fuel_usage_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="4dp"
-                        android:text="@string/used_fuel_header"
-                        android:textStyle="bold"
-                        android:textColor="#fe4901"
-                        android:layout_toRightOf="@id/fuel_usage_imageView"
-                        />
-                    <TextView
-                        android:id="@+id/fuel_usage_result_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="0.00 l"
-                        android:textColor="?attr/contentText"
-                        android:textSize="24sp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/fuel_usage_textView"/>
-                </RelativeLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="10dp"
-                android:layout_weight="1"
-                card_view:cardElevation="0dp"
-                card_view:cardBackgroundColor="?attr/cardBackgroundColor">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/total_cost_imageView"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/total_cost_icon"
-                        android:layout_alignParentLeft="true"/>
-                    <TextView
-                        android:id="@+id/total_cost_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="4dp"
-                        android:text="@string/total_cost_header"
-                        android:textStyle="bold"
-                        android:textColor="#fe4901"
-                        android:layout_toRightOf="@id/total_cost_imageView"
-                        />
-                    <TextView
-                        android:id="@+id/total_cost_price_per_person_result_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="0.00 zł"
-                        android:textColor="?attr/contentText"
-                        android:textSize="24sp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/total_cost_textView"/>
-                </RelativeLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-
-
-
-
-</LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/fuel_consumption_results_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="10dp"
-                android:layout_weight="1"
-                card_view:cardElevation="0dp"
-                card_view:cardBackgroundColor="?attr/cardBackgroundColor">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/average_fuel_consumption_imageView"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/fuel_usage_icon_18dp"
-                        android:layout_alignParentLeft="true"/>
-                    <TextView
-                        android:id="@+id/average_fuel_consumption_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="4dp"
-                        android:text="@string/average_fuel_consumption_header"
-                        android:textStyle="bold"
-                        android:textColor="#fe4901"
-                        android:layout_toRightOf="@id/average_fuel_consumption_imageView"
-                        />
-                    <TextView
-                        android:id="@+id/average_fuel_consumption_result_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="0.00 l/100km"
-                        android:textColor="?attr/contentText"
-                        android:textSize="24sp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/average_fuel_consumption_textView"/>
-                </RelativeLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="10dp"
-                android:layout_weight="1"
-                card_view:cardElevation="0dp"
-                card_view:cardBackgroundColor="?attr/cardBackgroundColor">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/total_cost_fuel_consumption_imageView"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/total_cost_icon"
-                        android:layout_alignParentLeft="true"/>
-                    <TextView
-                        android:id="@+id/total_cost_fuel_consumption_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="4dp"
-                        android:text="@string/total_cost_header"
-                        android:textStyle="bold"
-                        android:textColor="#fe4901"
-                        android:layout_toRightOf="@id/total_cost_fuel_consumption_imageView"
-                        />
-                    <TextView
-                        android:id="@+id/total_cost_fuel_consumption_result_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="0.00 zł"
-                        android:textColor="?attr/contentText"
-                        android:textSize="24sp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/total_cost_fuel_consumption_textView"/>
-                </RelativeLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/range_results_view"
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="10dp"
-                android:layout_weight="1"
-                card_view:cardElevation="0dp"
-                card_view:cardBackgroundColor="?attr/cardBackgroundColor">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/range_imageView"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/distance_icon_18dp"
-                        android:layout_alignParentLeft="true"/>
-                    <TextView
-                        android:id="@+id/range_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="4dp"
-                        android:text="@string/range_header"
-                        android:textStyle="bold"
-                        android:textColor="#fe4901"
-                        android:layout_toRightOf="@id/range_imageView" />
-                    <TextView
-                        android:id="@+id/range_result_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="0.00 km"
-                        android:textColor="?attr/contentText"
-                        android:textSize="24sp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/range_textView"/>
-                </RelativeLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                card_view:cardCornerRadius="16dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="10dp"
-                android:layout_weight="1"
-                card_view:cardElevation="0dp"
-                card_view:cardBackgroundColor="?attr/cardBackgroundColor">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/total_cost_range_imageView"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/total_cost_icon"
-                        android:layout_alignParentLeft="true"/>
-                    <TextView
-                        android:id="@+id/total_cost_range_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="4dp"
-                        android:text="@string/total_cost_header"
-                        android:textStyle="bold"
-                        android:textColor="#fe4901"
-                        android:layout_toRightOf="@id/total_cost_range_imageView"
-                        />
-                    <TextView
-                        android:id="@+id/total_cost_range_result_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="0.00 zł"
-                        android:textColor="?attr/contentText"
-                        android:textSize="24sp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/total_cost_range_textView"/>
-                </RelativeLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-        </LinearLayout>
-
+        android:layout_height="696dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
     </LinearLayout>
 
 
-</LinearLayout>
-</ScrollView>
-
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/calculate_floatingButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentRight="true"
-    android:layout_margin="@dimen/fab_margin"
-    android:clickable="true"
-    card_view:fabSize="mini"
-    android:src="@drawable/equal_sign_24dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/calculate_floatingButton"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:clickable="true"
-        card_view:fabSize="mini"
-        android:backgroundTint="#F44336"
-        card_view:borderWidth="0dp"
-        android:src="@drawable/clear_icon_18dp" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

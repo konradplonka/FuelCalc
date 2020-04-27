@@ -2,6 +2,7 @@ package com.konradplonka.fuelcalculator.other;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteCursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.konradplonka.fuelcalculator.R;
+import com.konradplonka.fuelcalculator.computations.FuelConsumptionComputations;
 import com.konradplonka.fuelcalculator.fragments.DictionaryTab;
 import com.konradplonka.fuelcalculator.fragments.dialogs.EditRecordDialog;
 
@@ -32,25 +34,30 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
-    private List<ListItem> listItems;
+import static android.content.Context.MODE_PRIVATE;
 
-    public void setListItemsFull(List<ListItem> listItemsFull) {
-        this.listItemsFull = listItemsFull;
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
+    public List<ListItem> getListItems() {
+        return listItems;
     }
 
+    private List<ListItem> listItems;
     private List<ListItem> listItemsFull;
     private Context context;
     private FragmentManager fragmentManager;
+    private OnMyAdapterListener listener;
+    private boolean fuelConsumptionCalc;
 
 
 
 
-    public MyAdapter(List<ListItem> listItems , Context context, FragmentManager fragmentManager) {
+    public MyAdapter(List<ListItem> listItems , Context context, FragmentManager fragmentManager, OnMyAdapterListener listener) {
         this.listItems = listItems;
         this.listItemsFull = listItems;
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.listener = listener;
+        fuelConsumptionCalc = getFuelConsumptionCalcStatePref();
 
 
     }
@@ -66,19 +73,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         public ImageView petrolStationImgImageView;
         public RelativeLayout itemContainerRelativeLayout;
         public ImageButton optionsImageButton;
+        public TextView distanceIncreaseTextView;
+        public TextView fuelConsumptionTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            dateTextView = (TextView) itemView.findViewById(R.id.date_item_textView);
-            distanceTextView = (TextView) itemView.findViewById(R.id.distance_item_textView);
-            totalCostTextView = (TextView) itemView.findViewById(R.id.total_cost_item_textView);
-            costPerLTextView = (TextView) itemView.findViewById(R.id.cost_per_l_item_textView);
-            amountOfFuelTextView = (TextView) itemView.findViewById(R.id.amount_of_fuel_item_textView);
-            descriptionTextView = (TextView) itemView.findViewById(R.id.description_item_textView);
+            dateTextView = (TextView) itemView.findViewById(R.id.date);
+            distanceTextView = (TextView) itemView.findViewById(R.id.distance);
+            totalCostTextView = (TextView) itemView.findViewById(R.id.total_cost);
+            costPerLTextView = (TextView) itemView.findViewById(R.id.cost_per_liter);
+            amountOfFuelTextView = (TextView) itemView.findViewById(R.id.amount_of_fuel);
+            descriptionTextView = (TextView) itemView.findViewById(R.id.description);
             petrolStationImgImageView = (ImageView) itemView.findViewById(R.id.petrol_station_image);
             itemContainerRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.item_container_relativeLayout);
             optionsImageButton = (ImageButton) itemView.findViewById(R.id.options_imageButton);
+            distanceIncreaseTextView = (TextView) itemView.findViewById(R.id.distance_increase);
+            fuelConsumptionTextView = (TextView) itemView.findViewById(R.id.fuel_consumption);
         }
     }
 
@@ -99,15 +110,37 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         holder.itemContainerRelativeLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_scale_animation));
 
         holder.dateTextView.setText(listItem.getDate());
-        holder.distanceTextView.setText(listItem.getDistance() + " km");
-        holder.totalCostTextView.setText(df.format(listItem.getTotalCost()) + " zł");
-        holder.costPerLTextView.setText(df.format(listItem.getTotalCost()/listItem.getAmountOfFuel()) + " zł");
-        holder.amountOfFuelTextView.setText(df.format(listItem.getAmountOfFuel()) + " l");
+        holder.distanceTextView.setText(formatDistance(String.valueOf(listItem.getDistance())) + " km");
+        holder.totalCostTextView.setText("-" + df.format(listItem.getTotalCost()) + " zł");
+        holder.costPerLTextView.setText(df.format(listItem.getTotalCost()/listItem.getAmountOfFuel()) + " zł/l");
+        holder.amountOfFuelTextView.setText("+" + df.format(listItem.getAmountOfFuel()) + " l");
+        if(getItemCount() > 1 && position != listItems.size() - 1){
+            Log.e("items", String.valueOf(getItemCount()));
+            int distance = listItem.getDistance() - listItems.get(position + 1).getDistance();
+            double amountOfFuel = listItems.get(position + 1).getAmountOfFuel();
+            holder.distanceIncreaseTextView.setVisibility(View.VISIBLE);
+            holder.distanceIncreaseTextView.setText("+" + distance + " km");
+
+            if(fuelConsumptionCalc){
+                holder.fuelConsumptionTextView.setVisibility(View.VISIBLE);
+                df.setMaximumFractionDigits(1);
+                holder.fuelConsumptionTextView.setText(df.format(new FuelConsumptionComputations(distance, amountOfFuel).calculateAverageFuelConsumpion()) + "l/100 km");
+            }
+
+        }
+        else{
+            holder.distanceIncreaseTextView.setVisibility(View.GONE);
+            holder.fuelConsumptionTextView.setVisibility(View.GONE);
+        }
+
 
         if(listItem.getDescription().length() == 0){
             holder.descriptionTextView.setVisibility(View.GONE);
         }
-        else holder.descriptionTextView.setText(listItem.getDescription());
+        else {
+            holder.descriptionTextView.setVisibility(View.VISIBLE);
+            holder.descriptionTextView.setText(listItem.getDescription());
+        }
 
         ArrayList<PetrolStation> petrolStationsList = PetrolStation.getPetrolStationList();
         for(PetrolStation petrolStation: petrolStationsList){
@@ -137,6 +170,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                                 if(db.deleteData(listItem.getId())){
                                     deleteRecord(listItem);
                                     Toast.makeText(context, "Usunięto!", Toast.LENGTH_SHORT);
+                                    listener.setVisibleAddButton();
+                                    listener.handleVisibilityOfEmptyListMessage();
                                 }
 
 
@@ -152,7 +187,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                                 bundle.putDouble("totalCost", listItem.getTotalCost());
                                 bundle.putString("date", listItem.getDate());
                                 bundle.putString("description", holder.descriptionTextView.getText().toString());
-
                                 EditRecordDialog editRecordDialog = new EditRecordDialog();
                                 editRecordDialog.setArguments(bundle);
                                 editRecordDialog.show(fragmentManager,"EditRecord");
@@ -269,7 +303,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
 
         }
-        listItems = listItemsFiltered;
+            listItems = listItemsFiltered;
+            sortData();
 
 
     }
@@ -288,6 +323,31 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     public void sortData(){
         Collections.sort(listItems, ListItem.BY_DATE_DESCENDING);
         notifyDataSetChanged();
+    }
+    private String formatDistance(String distance){
+        StringBuilder distanceReverse = new StringBuilder(distance).reverse();
+        distance = distanceReverse.toString();
+        StringBuilder formattedDistance = new StringBuilder();
+        for(int i = 0; i < distance.length(); i++) {
+            formattedDistance.append(distance.charAt(i));
+            if ((i + 1) % 3 == 0) {
+                formattedDistance.append(" ");
+            }
+        }
+
+        return formattedDistance.reverse().toString();
+    }
+
+    public boolean getFuelConsumptionCalcStatePref(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("myPref", MODE_PRIVATE);
+        boolean isDark = sharedPreferences.getBoolean("fuelConsumptionCalc", true);
+
+        return isDark;
+    }
+
+    public interface OnMyAdapterListener{
+        void setVisibleAddButton();
+        void handleVisibilityOfEmptyListMessage();
     }
 
 

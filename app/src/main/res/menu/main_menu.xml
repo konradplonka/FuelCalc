@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">>
 
     <item
-        android:id="@+id/item1"
+        android:id="@+id/calculator"
         android:title="Kalkulator"
-        android:icon="@drawable/calculator_menu_icon_24dp" />
+        android:icon="@drawable/calculator_menu_icon_24dp"
+        />
 
     <item
-        android:id="@+id/item2"
+        android:id="@+id/dictionary"
         android:title="Dziennik"
-        android:icon="@drawable/dictionary_menu_icon_24dp"/>
+        android:icon="@drawable/dictionary_menu_icon_24dp"
+        />
 
     <item
-        android:id="@+id/item3"
+        android:id="@+id/settings"
         android:title="Ustawienia"
-        android:icon="@drawable/settings_icon_24dp"/>
+        android:icon="@drawable/settings_icon_24dp" />
 </menu>

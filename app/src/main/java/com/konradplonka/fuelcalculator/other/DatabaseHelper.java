@@ -8,7 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.opencsv.CSVWriter;
+
+import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -159,74 +162,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean exportDatabase(String fileName, Context context){
         File directory = new File(context.getExternalFilesDir(null) + "/" + EXPORT_DICTIONARY);
+        File databaseFile = new File(String.valueOf(context.getDatabasePath(DATABASE_NAME)));
+
         if(!directory.exists()){
             directory.mkdirs();
         }
 
-        File file = new File(directory, fileName + ".csv");
+        File backupFile = new File(directory, fileName + ".db");
         try {
-            file.createNewFile();
-            CSVWriter csvWriter= new CSVWriter(new FileWriter(file));
-
-            DatabaseHelper db = new DatabaseHelper(context);
-            Cursor cursor = db.getData();
-
-            csvWriter.writeNext(cursor.getColumnNames());
-            while(cursor.moveToNext()){
-                String data [] = {
-                        String.valueOf(cursor.getInt(0)),
-                        cursor.getString(1),
-                        String.valueOf(cursor.getInt(2)),
-                        String.valueOf(cursor.getDouble(3)),
-                        String.valueOf(cursor.getDouble(4)),
-                        cursor.getString(5),
-                        cursor.getString(6)};
-                csvWriter.writeNext(data);
-
-            }
-            csvWriter.close();
-            cursor.close();
+            backupFile.createNewFile();
+            FileUtils.copyFile(databaseFile, backupFile);
             return true;
 
-        } catch (IOException e) {
-            Toast.makeText(context, "Błąd!", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
             return false;
         }
 
     }
 
-   /* public void importDatabase(String backupPath) throws FileNotFoundException {
-        File backupFile = new File(backupPath);
-        Log.e("Path: ", backupPath);
+   public boolean importDatabase(String backupFilePath, Context context){
+        File backupFile = new File(backupFilePath);
+        File databaseFile = new File(String.valueOf(context.getDatabasePath(DATABASE_NAME)));
 
-        if (backupFile.exists()){
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(backupFile));
+       try {
+           FileUtils.copyFile(backupFile, databaseFile);
+           return true;
+       } catch (IOException e) {
+           e.printStackTrace();
+           return false;
+       }
 
-            String csvLine = null;
-            String data [];
-            try {
-                bufferedReader.readLine(); // skip headers
-                while((csvLine = bufferedReader.readLine()) != null) {
-                    data = csvLine.split(",");
-                    Log.e("data", data[1]);
-                    addData(
-                            data[1].replace("\"", ""),
-                            Integer.parseInt(data[2].replace("\"", "")),
-                            Double.parseDouble(data[3].replace("\"", "")),
-                            Double.parseDouble(data[4].replace("\"", "")),
-                            data[5].replace("\"", ""),
-                            data[6].replace("\"", "")
-
-                    );
-                }
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
+   }
 
 
 }

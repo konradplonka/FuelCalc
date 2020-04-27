@@ -2,6 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="350dp" android:layout_height="wrap_content"
     android:background="@drawable/card_bg">
+    <LinearLayout
+        android:id="@+id/export_content_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp">
     <TextView
         android:id="@+id/export_header_textView"
         android:layout_width="wrap_content"
@@ -9,21 +16,37 @@
         android:text="@string/export"
         android:textColor="?attr/headerText"
         android:textSize="20sp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp" />
+    <TextView
+        android:id="@+id/export_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textStyle="bold" />
+        android:textColor="?attr/contentText"
+        android:layout_below="@id/export_header_textView"
+        android:text="@string/name_of_exported_database"/>
+        <Button
+            android:id="@+id/show_database_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="Pokaż plik"
+            android:textAllCaps="false"
+            android:textColor="@drawable/text_button_selector"
+            android:fontFamily="sans-serif"
+            android:layout_gravity="center"
+            style="?android:attr/borderlessButtonStyle"
+            android:visibility="gone"/>
     <EditText
         android:id="@+id/fileName_editText"
-        android:layout_below="@id/export_header_textView"
+        android:layout_below="@id/export_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:textColor="?attr/contentText"
         android:background="@null"
         android:textColorHint="?attr/contentText"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_marginTop="8dp" />
     <View
         android:id="@+id/divider_fileName"
         android:layout_below="@id/fileName_editText"
@@ -31,16 +54,28 @@
         android:layout_height="1dp"
         android:layout_marginTop="4dp"
         android:background="?attr/dividerText"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"/>
+
+    </LinearLayout>
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:layout_below="@id/export_content_linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="12dp"
+        android:src="@drawable/back_icon_24dp"
+        android:tint="@color/colorAccent" />
 
     <ImageButton
         android:id="@+id/export_imageButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/oval_button"
-        android:layout_below="@id/divider_fileName"
+        android:layout_below="@id/export_content_linearLayout"
         android:layout_alignParentRight="true"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -57,7 +92,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/progress_bar_bg"
-        android:layout_below="@id/divider_fileName"
+        android:layout_below="@id/export_content_linearLayout"
         android:layout_alignParentRight="true"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"

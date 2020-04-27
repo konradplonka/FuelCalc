@@ -1,5 +1,6 @@
 package com.konradplonka.fuelcalculator.fragments.dialogs;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,9 +25,13 @@ import androidx.fragment.app.DialogFragment;
 
 import com.konradplonka.fuelcalculator.R;
 import com.konradplonka.fuelcalculator.other.DatabaseHelper;
+import com.nbsp.materialfilepicker.MaterialFilePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
+
+import static com.konradplonka.fuelcalculator.other.DatabaseHelper.EXPORT_DICTIONARY;
 
 public class ExportDialog extends DialogFragment {
     private DatabaseHelper databaseHelper;
@@ -36,6 +42,9 @@ public class ExportDialog extends DialogFragment {
     private ImageView progressBarImageView;
     private EditText fileNameEditText;
     private View dividerFileName;
+    private TextView exportMessage;
+    private Button showDatabaseButton;
+    private ImageButton backImageButton;
 
 
     @Nullable
@@ -49,8 +58,36 @@ public class ExportDialog extends DialogFragment {
         initializeViewElements(view);
         setFileNameText();
         onAcceptFileNameClick();
+        onShowDatabaseButtonClick();
+        onBackImageButtonClick();
 
         return view;
+    }
+
+    private void onBackImageButtonClick() {
+        backImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+    }
+
+    private void onShowDatabaseButtonClick() {
+        showDatabaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialFilePicker()
+                        .withActivity((Activity) getContext())
+                        .withRequestCode(2)
+                        .withFilter(Pattern.compile(".*\\.db$")) // Filtering files and directories by file name using regexp
+                        .withFilterDirectories(true) // Set directories filterable (false by default)
+                        .withHiddenFiles(true) // Show hidden files and folders
+                        .withPath(getContext().getExternalFilesDir(null) + "/" + EXPORT_DICTIONARY)
+                        .start();
+            }
+        });
+
     }
 
     private void onAcceptFileNameClick() {
@@ -72,6 +109,9 @@ public class ExportDialog extends DialogFragment {
         progressBarImageView = (ImageView) view.findViewById(R.id.progressBar_imageView);
         fileNameEditText = (EditText) view.findViewById(R.id.fileName_editText);
         dividerFileName = (View) view.findViewById(R.id.divider_fileName);
+        exportMessage = view.findViewById(R.id.export_message);
+        showDatabaseButton = view.findViewById(R.id.show_database_button);
+        backImageButton = view.findViewById(R.id.back_button);
 
     }
 
@@ -81,9 +121,16 @@ public class ExportDialog extends DialogFragment {
         progressBarTextView.setAnimation(getAnimation());
 
 
+
         progressBarLinearLayout.setVisibility(View.VISIBLE);
         progressBarImageView.setVisibility(View.VISIBLE);
-        progressBarTextView.setText("Zakończono!");
+        progressBarTextView.setText(R.string.finished);
+
+        exportMessage.setAnimation(getAnimation());
+        exportMessage.setText(R.string.database_has_been_exported_correctly);
+
+        showDatabaseButton.setAnimation(getAnimation());
+        showDatabaseButton.setVisibility(View.VISIBLE);
 
 
         fileNameEditText.setVisibility(View.GONE);

@@ -13,21 +13,23 @@
     android:layout_height="wrap_content"
     android:paddingRight="16dp"
     android:paddingLeft="16dp">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/select_station"
+        android:text="@string/set_station"
         android:textColor="?attr/headerText"
         android:textSize="20sp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold" />
+        android:layout_marginTop="8dp" />
+
     <RadioGroup
         android:id="@+id/set_station_radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
     </RadioGroup>
+
     <ImageButton
         android:id="@+id/set_station_button"
         android:layout_width="40dp"

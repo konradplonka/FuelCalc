@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:background="@null">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="10dp"
+            android:layout_marginTop="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/cost_per_person_imageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/cost_per_person_icon_18dp"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/cost_per_person_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:text="@string/cost_per_person_header"
+                        android:textStyle="bold"
+                        android:textColor="#fe4901"
+                        android:layout_toRightOf="@id/cost_per_person_imageView"
+                        />
+                    <TextView
+                        android:id="@+id/cost_per_person_result_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0.00 zł"
+                        android:textColor="?attr/contentText"
+                        android:textSize="24sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/cost_per_person_textView"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="10dp"
+            android:layout_marginTop="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/cost_per_person_imageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/cost_per_person_icon_18dp"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/cost_per_person_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:text="@string/cost_per_person_header"
+                        android:textStyle="bold"
+                        android:textColor="#fe4901"
+                        android:layout_toRightOf="@id/cost_per_person_imageView"
+                        />
+                    <TextView
+                        android:id="@+id/cost_per_person_result_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0.00 zł"
+                        android:textColor="?attr/contentText"
+                        android:textSize="24sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/cost_per_person_textView"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="10dp"
+            android:layout_marginTop="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/cost_per_person_imageView"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/cost_per_person_icon_18dp"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/cost_per_person_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:text="@string/cost_per_person_header"
+                        android:textStyle="bold"
+                        android:textColor="#fe4901"
+                        android:layout_toRightOf="@id/cost_per_person_imageView"
+                        />
+                    <TextView
+                        android:id="@+id/cost_per_person_result_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0.00 zł"
+                        android:textColor="?attr/contentText"
+                        android:textSize="24sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/cost_per_person_textView"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

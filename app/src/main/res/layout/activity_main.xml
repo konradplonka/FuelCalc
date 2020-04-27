@@ -12,20 +12,14 @@
     android:id="@+id/container"
     android:layout_marginBottom="50dp"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_menu"
-        android:background="@drawable/card_bg"
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/bottom_navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:labelVisibilityMode="selected"
-        app:itemTextColor="@color/menu_color"
-        app:itemIconTint="@color/menu_color"
-        app:itemIconSize="24dp"
-        app:menu="@menu/main_menu"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        app:elevation="0dp"/>
+        android:background="?attr/cardBackgroundColor"
+        app:cnb_menuResource="@menu/main_menu"
+        app:cnb_unselectedColor="#DBDBDB" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

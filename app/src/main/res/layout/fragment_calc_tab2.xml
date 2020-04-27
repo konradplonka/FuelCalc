@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_bg"
+            android:padding="10dp"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dane"
+                    android:textColor="?attr/headerText"
+                    android:textSize="20sp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"/>
+                <ImageButton
+                    android:id="@+id/clear_button"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/oval_button"
+                    android:backgroundTint="#F44336"
+                    android:src="@drawable/clear_icon_18dp"
+                    android:padding="8dp"/>
+            </RelativeLayout>
+
+
+            <EditText
+                android:id="@+id/distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_bg"
+                android:hint="@string/distance"
+                android:inputType="numberDecimal"
+                android:textAlignment="textStart"
+                android:textSize="14sp"
+                android:textColor="?attr/contentText"
+                android:textColorHint="?attr/contentText" />
+
+
+            <EditText
+                android:id="@+id/price_per_liter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_bg"
+                android:hint="@string/price_per_liter"
+                android:inputType="numberDecimal"
+                android:textAlignment="textStart"
+                android:textSize="14sp"
+                android:textColor="?attr/contentText"
+                android:textColorHint="?attr/contentText"
+                android:drawableEnd="@drawable/ic_info_18dp"
+                android:drawableTint="?attr/contentText" />
+
+
+            <EditText
+                android:id="@+id/amount_of_fuel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_bg"
+                android:hint="@string/amount_of_fuel"
+                android:inputType="numberDecimal"
+                android:drawablePadding="16dp"
+                android:textAlignment="textStart"
+                android:textSize="14sp"
+                android:textColor="?attr/contentText"
+                android:textColorHint="?attr/contentText"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_info_18dp"
+                    android:tint="?attr/contentText"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/the_field_is_not_required"
+                    android:textColor="?attr/contentText"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/calculate_button"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/card_bg"
+            android:text="@string/calculate"
+            android:textAllCaps="false"
+            android:textColor="@drawable/text_button_selector"
+            android:fontFamily="sans-serif"
+            android:textAlignment="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-6423582238187622/6488972567">
+        </com.google.android.gms.ads.AdView>
+
+        <LinearLayout
+            android:id="@+id/results"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/card_bg"
+            android:padding="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wyniki"
+                android:textColor="?attr/headerText"
+                android:textSize="20sp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <ImageView
+                            android:id="@+id/fuel_consumption_icon"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_fuel_consumption"
+                            android:tint="#BEBEBE" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/fuel_consumption_icon"
+                            android:text="Spalanie"
+                            android:textColor="?attr/contentText"
+                            android:layout_centerInParent="true"
+                            android:textSize="12sp"
+                            android:layout_marginLeft="4dp"
+                            />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/fuel_consumption_result"
+                        android:layout_below="@id/costs_per_person_text"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="20.32 zł"
+                        android:textSize="16sp"
+                        android:textColor="?attr/headerText"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-light"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/total_cost_result_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <ImageView
+                            android:id="@+id/total_cost_icon"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_cash"
+                            android:tint="#BEBEBE" />
+                        <TextView
+                            android:id="@+id/total_cost_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/total_cost_icon"
+                            android:text="Całkowity koszt"
+                            android:textColor="?attr/contentText"
+                            android:layout_centerInParent="true"
+                            android:textSize="12sp"
+                            android:layout_marginLeft="4dp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/total_cost_result"
+                        android:layout_below="@id/total_cost_text"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20.32 zł"
+                        android:textSize="16sp"
+                        android:textColor="?attr/headerText"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-light"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

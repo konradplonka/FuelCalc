@@ -20,7 +20,7 @@ public class CostPerPersonComputations {
     public double calculateTotalCost(){
         return ((fuelConsumption * distance) / 100) * fuelPrice;
     }
-    public double calculateUsedFuel(){
+    public double calculateFuelUsage(){
         return (fuelConsumption * distance) / 100;
     }
 }

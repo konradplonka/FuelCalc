@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +34,8 @@ public class EditRecordDialog extends DialogFragment implements SetStationDialog
 
     private ImageView stationImageView;
     private Button setStationButton;
+    private TextView distanceTextView;
+    private RadioGroup counterRadioGroup;
     private EditText distanceEditText;
     private EditText amountOfFuelEditText;
     private EditText costEditText;
@@ -73,6 +77,9 @@ public class EditRecordDialog extends DialogFragment implements SetStationDialog
     }
 
     private void fillFieldsWithItemData(Bundle savedInstanceState) {
+
+        distanceTextView.setVisibility(View.GONE);
+        counterRadioGroup.setVisibility(View.GONE);
 
         ArrayList<PetrolStation> petrolStationsList = PetrolStation.getPetrolStationList();
         for(PetrolStation petrolStation: petrolStationsList){
@@ -123,8 +130,11 @@ public class EditRecordDialog extends DialogFragment implements SetStationDialog
 
     private void initializeAddRecordDialogElements(View view) {
 
+
         stationImageView = view.findViewById(R.id.station_addRecord_imageView);
         setStationButton = view.findViewById(R.id.set_station_button);
+        distanceTextView = view.findViewById(R.id.distance_addRecord_textView);
+        counterRadioGroup = view.findViewById(R.id.counter_radioGroup);
         distanceEditText = view.findViewById(R.id.distance_addRecord_editText);
         amountOfFuelEditText = view.findViewById(R.id.amount_of_fuel_addRecord_editText);
         costEditText = view.findViewById(R.id.cost_addRecord_editText);
@@ -146,7 +156,7 @@ public class EditRecordDialog extends DialogFragment implements SetStationDialog
                 boolean isSelected = ((AppCompatRadioButton)v).isChecked();
                 if(isSelected){
                     totalCostRadioButton.setTextColor(Color.WHITE);
-                    pricePerLRadioButton.setTextColor(getContext().getResources().getColor(R.color.green));
+                    pricePerLRadioButton.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
 
                     costEditText.setHint("Całkowity koszt [zł]");
                     costEditText.setText(df.format(savedInstanceState.getDouble("totalCost")));
@@ -159,7 +169,7 @@ public class EditRecordDialog extends DialogFragment implements SetStationDialog
             public void onClick(View v) {
                 boolean isSelected = ((AppCompatRadioButton)v).isChecked();
                 if(isSelected){
-                    totalCostRadioButton.setTextColor(getContext().getResources().getColor(R.color.green));
+                    totalCostRadioButton.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
                     pricePerLRadioButton.setTextColor(Color.WHITE);
 
                     costEditText.setHint("Cena za l [zł]");
@@ -172,8 +182,6 @@ public class EditRecordDialog extends DialogFragment implements SetStationDialog
 
 
     private void handleEditRecord(final Bundle bundle) {
-
-
 
 
 

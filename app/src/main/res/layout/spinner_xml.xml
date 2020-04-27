@@ -5,7 +5,8 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     style="?attr/spinnerDropDownItemStyle"
-    android:textColor="?attr/contentText"
-    android:textAlignment="center">
+    android:textColor="@color/colorAccent"
+    android:textAlignment="center"
+    >
 
 </TextView>

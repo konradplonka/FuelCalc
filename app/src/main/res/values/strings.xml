@@ -1,28 +1,33 @@
 <resources>
     <string name="app_name">FuelCalculator</string>
 
-    <string name="cost_per_person_menu">Koszty na os.</string>
+
+    <string name="cost_per_person_menu">Koszty na osobę</string>
     <string name="fuel_consumption_menu">Spalanie</string>
     <string name="range_menu">Zasięg</string>
-
     <string name="distance">Odległość [km]</string>
     <string name="price_per_liter">Cena za litr [zł]</string>
     <string name="fuel_consumption">Zużycie paliwa [l/100km]</string>
     <string name="amount_of_people">Ilość osób</string>
     <string name="amount_of_fuel">Ilość paliwa [l]</string>
-
-
+    <string name="the_field_is_not_required">Pole nie jest wymagane</string>
+    <string name="calculate">Oblicz</string>
     <string name="cost_per_person_header">Koszt na osobę</string>
     <string name="used_fuel_header">Zużyte paliwo</string>
     <string name="total_cost_header">Całkowity koszt</string>
     <string name="average_fuel_consumption_header">Średnie spalanie</string>
     <string name="range_header">Zasięg</string>
-
-
     <string name="data">Dane</string>
     <string name="results">Wyniki</string>
+    <string name="fill_all_required_fields">"Uzupełnij wszystkice wymagane pola!"</string>
+    <string name="fiels_ccnnot_be_zero">Pola nie mogą mieć wartości 0!</string>
+
+
     <string name="set_station">Ustaw stacje</string>
-    <string name="counter">Licznik [km]</string>
+    <string name="vehicle_mileage">Przebieg</string>
+    <string name="daily_counter">Licznik dzienny</string>
+    <string name="vehicle_mileage_km">Przebieg [km]</string>
+    <string name="daily_counter_km">Licznik dzienny [km]</string>
     <string name="refueled">Zatankowano [l]</string>
     <string name="total_cost_radio_button">Całk. koszt</string>
     <string name="price_per_liter_radio_button">Cena za l</string>
@@ -31,16 +36,41 @@
     <string name="description">Opis</string>
 
 
-    <string name="backup">Kopia zapasowa</string>
-    <string name="import_">Importuj</string>
+    <string name="brand">Marka</string>
+    <string name="model">Model</string>
+
+
     <string name="export">Eksportuj</string>
     <string name="delete_existing_database_and_add_to_new">Usuń istniejącą bazę danych i dodaj do nowej</string>
     <string name="add_to_existing_database">Dodaj do istniejącej bazy danych</string>
 
-    <string name="select_station">Wybierz stacje</string>
-
     <string name="settings">Ustawienia</string>
+    <string name="appearance">Wygląd</string>
     <string name="dark_theme">Ciemny motyw</string>
+    <string name="backup">Kopia zapasowa</string>
+    <string name="refuelling_dictionary">Dziennik tankowań</string>
+    <string name="calculate_average_fuel_consumption">Obliczaj średnie spalanie</string>
+    <string name="about_application">O aplikacji</string>
+
+
+    <string name="export_all_data">Eksportuj wszystkie dane</string>
+    <string name="name_of_exported_database">Nazwa wyeksporotwanej bazy danych:</string>
+    <string name="database_has_been_exported_correctly">Baza danych została poprawnie wyeksportowana!</string>
+
+    <string name="import_data">Importuj dane</string>
+    <string name="import_">Importuj</string>
+    <string name="import_message">Kontynuowanie spowoduje usunięcie wszystkich niewyeksportownaych danych. Czy chcesz kontynuować?</string>
+
+    <string name="finished">Zakończono!</string>
+
+
+    <string name="ops_message">UPS!</string>
+    <string name="no_data_to_show">Brak danych do wyświetlenia.</string>
+
+
+    <string name="in_order_to_add_record_firstly_you_have_to_add_vehicle_profile">Aby dodać rekord musisz utworzyć profil samochodu!</string>
+    <string name="vehicle_has_been_removed">Pojazd został usunięty!</string>
+    <string name="error_in_removing_vehicle">Błąd w usuwaniu pojazdu!</string>
 
 
 </resources>

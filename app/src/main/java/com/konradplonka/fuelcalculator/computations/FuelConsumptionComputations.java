@@ -10,6 +10,10 @@ public class FuelConsumptionComputations {
         this.fuelPrice = fuelPrice;
         this.amountOfFuel = amountOfFuel;
     }
+    public FuelConsumptionComputations(double distance, double amountOfFuel){
+        this.distance = distance;
+        this.amountOfFuel = amountOfFuel;
+    }
 
     public double calculateAverageFuelConsumpion(){
         return (amountOfFuel / distance) * 100;

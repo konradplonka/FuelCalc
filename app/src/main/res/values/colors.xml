@@ -5,5 +5,14 @@
     <color name="colorAccent">#0091EA</color>
 
 
+    <color name="lightBlue">#94c2f1</color>
+    <color name="lightOrange">#f7c480</color>
+    <color name="lightGreen">#76cda2</color>
+
+
+    <color name="darkBlue">#5CA5F0</color>
+    <color name="darkOrange">#F5A740</color>
+    <color name="darkGreen">#14B860</color>
+
     <color name="green">#4CAF50</color>
 </resources>

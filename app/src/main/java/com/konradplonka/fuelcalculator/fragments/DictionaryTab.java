@@ -1,5 +1,6 @@
 package com.konradplonka.fuelcalculator.fragments;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteCursor;
 import android.os.Bundle;
@@ -8,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -26,18 +29,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.konradplonka.fuelcalculator.R;
 import com.konradplonka.fuelcalculator.fragments.dialogs.AddRecordDialog;
 import com.konradplonka.fuelcalculator.fragments.dialogs.AddVehicleDialog;
-import com.konradplonka.fuelcalculator.fragments.dialogs.SettingsDialog;
 import com.konradplonka.fuelcalculator.other.DatabaseHelper;
 import com.konradplonka.fuelcalculator.other.ListItem;
 import com.konradplonka.fuelcalculator.other.MyAdapter;
 import com.konradplonka.fuelcalculator.other.VehicleListItem;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVehicleDialogListener, AddRecordDialog.OnAddRecordDialogListener {
+public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVehicleDialogListener, AddRecordDialog.OnAddRecordDialogListener, MyAdapter.OnMyAdapterListener {
 
     private RecyclerView.LayoutManager layoutManager;
     private MyAdapter adapter;
@@ -56,8 +59,7 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
     private ImageButton vehicleMenu;
     private RelativeLayout vehicleSelectorRelativeLayout;
     private FloatingActionButton addRecordFabButton;
-    private FloatingActionButton settingsFabButton;
-    private FloatingActionButton backupFabButton;
+    private LinearLayout emptyListMessageLinearLayout;
 
 
 
@@ -68,6 +70,8 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
 
         selectedVehicleId = getSelectedVehicleIdStatePref();
         selectedVehiclePosition = getSelectedVehiclePositionStatePref();
+
+
         db = new DatabaseHelper(getContext());
 
         initializeViewElements(view);
@@ -75,8 +79,9 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
         handleRecyclerView();
         handleSpinner();
 
+
+
         onAddRecordClick();
-        onSettingsClick();
         handleFabButtons();
 
         return view;
@@ -86,42 +91,40 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
         addRecordFabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(vehiclesListString.size() >1){
+                if(spinner.getSelectedItemPosition() != 0){
                     Bundle bundle = new Bundle();
                     bundle.putInt("vehicleId", selectedVehicleId);
+
+                    if(adapter.getListItems().size() != 0){
+                        int distance = adapter.getListItems().get(0).getDistance();
+                        bundle.putInt("distance", distance);
+                    }
                     AddRecordDialog addRecordFragment = new AddRecordDialog();
                     addRecordFragment.setArguments(bundle);
                     addRecordFragment.show(getFragmentManager(), "AddRecordDialog");
                     addRecordFragment.setTargetFragment(DictionaryTab.this, 1);
                 }
-                else Toast.makeText(getContext(), "Aby dodać rekord musisz utworzyć profil samochodu!", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getContext(), R.string.in_order_to_add_record_firstly_you_have_to_add_vehicle_profile, Toast.LENGTH_SHORT).show();
 
 
             }
         });
     }
 
-    private void onSettingsClick(){
-        settingsFabButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SettingsDialog settingsDialog = new SettingsDialog();
-                settingsDialog.show(getFragmentManager(), "SettingsDialog");
-            }
-        });
-
-
+    @Override
+    public void onStart() {
+        selectedVehicleId = getSelectedVehicleIdStatePref();
+        selectedVehiclePosition = getSelectedVehiclePositionStatePref();
+        super.onStart();
     }
-
 
     private void initializeViewElements(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
         spinner = view.findViewById(R.id.car_selector_spinner);
         vehicleMenu = view.findViewById(R.id.vehicle_handle_menu_imageButton);
         addRecordFabButton = view.findViewById(R.id.addRecordButton);
-        settingsFabButton = view.findViewById(R.id.settingsButton);
-        backupFabButton = view.findViewById(R.id.backupButton);
         vehicleSelectorRelativeLayout = view.findViewById(R.id.vehicle_selector_spinner_RelativeLayout);
+        emptyListMessageLinearLayout = view.findViewById(R.id.empty_list_message_linearLayout);
     }
 
     private void initializeLists() {
@@ -136,8 +139,10 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new MyAdapter(dataList, getContext(), getFragmentManager());
+        adapter = new MyAdapter(dataList, getContext(), getFragmentManager(), DictionaryTab.this);
         recyclerView.setAdapter(adapter);
+        adapter.filterDataByVehicleId(selectedVehicleId);
+
 
         loadDatabase();
     }
@@ -145,20 +150,22 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
         onVehicleMenuClick();
         getSpinnerVehiclesList();
 
+
         vehicleAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_xml, vehiclesListString);
         vehicleAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
         spinner.setAdapter(vehicleAdapter);
         spinner.setBackgroundResource(R.drawable.card_bg);
         spinner.setSelection(selectedVehiclePosition);
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position != 0){
                     selectedVehiclePosition = position;
+
                     for(VehicleListItem vehicle: vehiclesList){
                         if(vehicle.toString().equals(vehiclesListString.get(position))){
                             selectedVehicleId = vehicle.getId();
+
                             break;
                         }
 
@@ -166,7 +173,15 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
                     saveSelectedVehicleStatePref(selectedVehicleId, selectedVehiclePosition);
                     adapter.filterDataByVehicleId(selectedVehicleId);
                     adapter.notifyDataSetChanged();
+                    handleVisibilityOfEmptyListMessage();
+
                 }
+                else {
+                    adapter.filterDataByVehicleId(0);
+                    adapter.notifyDataSetChanged();
+                }
+
+
             }
 
             @Override
@@ -220,16 +235,30 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
         String selectedItem = spinner.getSelectedItem().toString();
         for(VehicleListItem vehicle: vehiclesList){
             if(selectedItem.equals(vehicle.toString())){
-                if(db.deleteVehicle(vehicle.getId()) &&  db.deleteSpecifyVehicleData(vehicle.getId())){
-                    saveSelectedVehicleStatePref(0,0);
-                    vehiclesListString.remove(selectedItem);
-                    vehiclesList.remove(vehicle);
-                    adapter.clearList();
-                    adapter.notifyDataSetChanged();
+                if(adapter.getItemCount() > 0){
+                    if(db.deleteVehicle(vehicle.getId()) &&  db.deleteSpecifyVehicleData(vehicle.getId())){
+                        saveSelectedVehicleStatePref(0,0);
+                        vehiclesListString.remove(selectedItem);
+                        vehiclesList.remove(vehicle);
+                        adapter.clearList();
+                        adapter.notifyDataSetChanged();
 
-                    Toast.makeText(getContext(), "Usunięto pojazd!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.vehicle_has_been_removed, Toast.LENGTH_SHORT).show();
+                    }
+                    else Toast.makeText(getContext(), R.string.error_in_removing_vehicle, Toast.LENGTH_SHORT).show();
+
                 }
-                else Toast.makeText(getContext(), "Błąd w usuwaniu pojazdu!", Toast.LENGTH_SHORT).show();
+                else{
+                    if(db.deleteVehicle(vehicle.getId())){
+                        saveSelectedVehicleStatePref(0,0);
+                        vehiclesListString.remove(selectedItem);
+                        vehiclesList.remove(vehicle);
+
+                        Toast.makeText(getContext(), R.string.vehicle_has_been_removed, Toast.LENGTH_SHORT).show();
+                    }
+                    else Toast.makeText(getContext(), R.string.error_in_removing_vehicle, Toast.LENGTH_SHORT).show();
+
+                }
 
 
 
@@ -249,7 +278,6 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
     public void loadDatabase(){
         loadVehiclesDatabase();
         adapter.addRecordsFromDatabase();
-        adapter.sortData();
     }
 
     private void loadVehiclesDatabase(){
@@ -259,7 +287,6 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
                 int id = cursor.getInt(0);
                 String brand = cursor.getString(1);
                 String model = cursor.getString(2);
-                Log.e("brand", brand);
 
                 vehiclesList.add(new VehicleListItem(id, brand, model));
             }
@@ -286,7 +313,6 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
     public void refreshRecyclerView() {
         adapter.addLatestRecordFromDatabase();
         adapter.filterDataByVehicleId(selectedVehicleId);
-        adapter.sortData();
     }
 
     private void saveSelectedVehicleStatePref(int selectedVehicleId, int selectedVehiclePosition){
@@ -314,16 +340,12 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0 && (addRecordFabButton.isShown() && backupFabButton.isShown() && settingsFabButton.isShown())){
+                if (dy > 0 && (addRecordFabButton.isShown())){
                     addRecordFabButton.hide();
-                    backupFabButton.hide();
-                    settingsFabButton.hide();
                 }
 
-                else if (dy < 0 && (!addRecordFabButton.isShown() && !backupFabButton.isShown() && !settingsFabButton.isShown())){
+                else if (dy < 0 && (!addRecordFabButton.isShown())){
                     addRecordFabButton.show();
-                    backupFabButton.show();
-                    settingsFabButton.show();
                 }
             }
         });
@@ -333,4 +355,29 @@ public class DictionaryTab extends Fragment implements AddVehicleDialog.OnAddVeh
     public void updateItemData(int position, String stationTag, int distance, double amountOfFuel, double totalCost, String date, String description){
         adapter.updateRecord(position, stationTag, distance, amountOfFuel, totalCost, date, description);
     }
+
+    @Override
+    public void handleVisibilityOfEmptyListMessage(){
+        if(adapter.getItemCount() == 0){
+            emptyListMessageLinearLayout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in_animation));
+            emptyListMessageLinearLayout.setVisibility(View.VISIBLE);
+        }
+        else{
+            emptyListMessageLinearLayout.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        spinner.setSelection(selectedVehiclePosition);
+    }
+
+    @Override
+    public void setVisibleAddButton() {
+        if(!addRecordFabButton.isShown()){
+            addRecordFabButton.show();
+        }
+    }
+
 }

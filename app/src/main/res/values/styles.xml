@@ -42,9 +42,13 @@
 
     <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
         <item name="android:popupBackground">@drawable/card_bg</item>
-
-
     </style>
+
+    <style name="TextButton" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

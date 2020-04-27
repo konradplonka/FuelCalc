@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,9 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
 
     private ImageView stationImageView;
     private Button setStationButton;
+    private TextView distanceTextView;
+    private RadioButton counterRadioButton;
+    private RadioButton dailyCounterRadioButton;
     private EditText distanceEditText;
     private EditText amountOfFuelEditText;
     private EditText costEditText;
@@ -44,6 +48,7 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
     private ImageButton addRecordButton;
     private DatabaseHelper db;
     private int vehicleId;
+    private int distance;
     private OnAddRecordDialogListener listener;
 
 
@@ -55,9 +60,17 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
         db = new DatabaseHelper(getContext());
         savedInstanceState = getArguments();
         vehicleId = savedInstanceState.getInt("vehicleId");
+        distance = (savedInstanceState.getInt("distance"));
+
+
 
         initializeAddRecordDialogElements(view);
+
+        distanceTextView.setText(formatDistance(String.valueOf(distance)) + " km");
+
+
         handleCostRadioButtons();
+        handleCounterRadioButtons();
         openSetStationDialog();
         addRecordToList();
 
@@ -103,6 +116,9 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
 
         stationImageView = view.findViewById(R.id.station_addRecord_imageView);
         setStationButton = view.findViewById(R.id.set_station_button);
+        distanceTextView = view.findViewById(R.id.distance_addRecord_textView);
+        counterRadioButton = view.findViewById(R.id.counter_radioButton);
+        dailyCounterRadioButton = view.findViewById(R.id.daily_counter_radioButton);
         distanceEditText = view.findViewById(R.id.distance_addRecord_editText);
         amountOfFuelEditText = view.findViewById(R.id.amount_of_fuel_addRecord_editText);
         costEditText = view.findViewById(R.id.cost_addRecord_editText);
@@ -126,7 +142,7 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
                     totalCostRadioButton.setTextColor(Color.WHITE);
                     pricePerLRadioButton.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
 
-                    costEditText.setHint("Całkowity koszt [zł]");
+                    costEditText.setHint(R.string.total_cost);
                 }
             }
         });
@@ -139,7 +155,37 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
                     totalCostRadioButton.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
                     pricePerLRadioButton.setTextColor(Color.WHITE);
 
-                    costEditText.setHint("Cena za l [zł]");
+                    costEditText.setHint(R.string.price_per_liter);
+
+                }
+            }
+        });
+    }
+
+    private void handleCounterRadioButtons() {
+
+        counterRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isSelected = ((AppCompatRadioButton)v).isChecked();
+                if(isSelected){
+                    counterRadioButton.setTextColor(Color.WHITE);
+                    dailyCounterRadioButton.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
+
+                    distanceEditText.setHint(R.string.vehicle_mileage_km);
+                }
+            }
+        });
+
+        dailyCounterRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isSelected = ((AppCompatRadioButton)v).isChecked();
+                if(isSelected){
+                    counterRadioButton.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
+                    dailyCounterRadioButton.setTextColor(Color.WHITE);
+
+                    distanceEditText.setHint(R.string.daily_counter_km);
 
                 }
             }
@@ -149,34 +195,40 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
 
     private void addRecordToList() {
 
-
-
             addRecordButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(!isEmptyField(distanceEditText) && !isNull(distanceEditText) && !isEmptyField(amountOfFuelEditText) && !isNull(amountOfFuelEditText) && !isEmptyField(costEditText) && !isNull(costEditText)) {
+                        double totalCost;
+                        int counter;
                         if (totalCostRadioButton.isChecked()) {
-                            db.addData(
-                                    vehicleId,
-                                    stationImageView.getTag().toString(),
-                                    Integer.parseInt(distanceEditText.getText().toString()),
-                                    Double.parseDouble(amountOfFuelEditText.getText().toString()),
-                                    Double.parseDouble(costEditText.getText().toString()),
-                                    dateEditText.getText().toString(),
-                                    descriptionEditText.getText().toString()
-                            );
+                            totalCost = Double.parseDouble(costEditText.getText().toString());
+
                         } else {
-                            db.addData(vehicleId,
-                                    stationImageView.getTag().toString(),
-                                    Integer.parseInt(distanceEditText.getText().toString()),
-                                    Double.parseDouble(amountOfFuelEditText.getText().toString()),
-                                    Double.parseDouble(costEditText.getText().toString()) * Double.parseDouble(amountOfFuelEditText.getText().toString()),
-                                    dateEditText.getText().toString(),
-                                    descriptionEditText.getText().toString()
-                            );
+                            totalCost = Double.parseDouble(costEditText.getText().toString()) * Double.parseDouble(amountOfFuelEditText.getText().toString());
+
                         }
 
+                        if(counterRadioButton.isChecked()){
+                            counter = Integer.parseInt(distanceEditText.getText().toString());
+
+                        }
+                        else {
+                            counter = distance + Integer.parseInt(distanceEditText.getText().toString());
+                        }
+
+                        db.addData(
+                                vehicleId,
+                                stationImageView.getTag().toString(),
+                                counter,
+                                Double.parseDouble(amountOfFuelEditText.getText().toString()),
+                                totalCost,
+                                dateEditText.getText().toString(),
+                                descriptionEditText.getText().toString()
+                        );
+
                         listener.refreshRecyclerView();
+                        listener.handleVisibilityOfEmptyListMessage();
                         dismiss();
                     }
 
@@ -214,6 +266,20 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
         stationImageView.setTag(petrolStation.getPetrolStations().toString());
     }
 
+    private String formatDistance(String distance){
+        StringBuilder distanceReverse = new StringBuilder(distance).reverse();
+        distance = distanceReverse.toString();
+        StringBuilder formattedDistance = new StringBuilder();
+        for(int i = 0; i < distance.length(); i++) {
+            formattedDistance.append(distance.charAt(i));
+            if ((i + 1) % 3 == 0) {
+                formattedDistance.append(" ");
+            }
+        }
+
+        return formattedDistance.reverse().toString();
+    }
+
 
     @Override
     public void onDateChange(String date) {
@@ -229,6 +295,7 @@ public class AddRecordDialog extends DialogFragment implements SetStationDialog.
 
     public interface OnAddRecordDialogListener{
         void refreshRecyclerView();
+        void handleVisibilityOfEmptyListMessage();
 
     }
 

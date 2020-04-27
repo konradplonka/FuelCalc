@@ -16,8 +16,7 @@
             android:textColor="?attr/headerText"
             android:textSize="20sp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold" />
+            android:layout_marginTop="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,34 +32,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:background="@null"
-                android:hint="Marka"
+                android:background="@drawable/edit_text_bg"
+                android:hint="@string/brand"
                 android:textAlignment="textStart"
                 android:textSize="14sp"
                 android:textColor="?attr/contentText"
                 android:textColorHint="?attr/contentText"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="4dp"
-                android:background="?attr/dividerText"/>
+
             <EditText
                 android:id="@+id/model_addVehicle_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:background="@null"
-                android:hint="Model"
+                android:background="@drawable/edit_text_bg"
+                android:hint="@string/model"
                 android:textAlignment="textStart"
                 android:textSize="14sp"
                 android:textColor="?attr/contentText"
                 android:textColorHint="?attr/contentText"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="4dp"
-                android:background="?attr/dividerText"/>
+
 
             <ImageButton
                 android:id="@+id/add_vehicle_button"

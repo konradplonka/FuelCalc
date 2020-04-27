@@ -13,7 +13,8 @@
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp">
         <Spinner
             android:id="@+id/car_selector_spinner"
             android:layout_width="match_parent"
@@ -22,12 +23,12 @@
             android:spinnerMode="dropdown"
             android:popupBackground="@drawable/card_bg"
             android:layout_gravity="center"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentLeft="true"/>
         <ImageButton
             android:id="@+id/vehicle_handle_menu_imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
             android:contentDescription="TODO"
@@ -37,7 +38,30 @@
             android:rotation="90" />
 
         </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/empty_list_message_linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ops_message"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="?attr/contentText"/>
+        <TextView
+            android:id="@+id/no_data_message_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data_to_show"
+            android:textColor="?attr/contentText"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -57,27 +81,7 @@
         android:layout_alignParentEnd="true"
         app:fabSize="mini"
         android:src="@drawable/add_icon_24dp"/>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/backupButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:clickable="true"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@id/addRecordButton"
-        app:fabSize="mini"
-        android:src="@drawable/backup_icon_24dp"/>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/settingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@id/backupButton"
-        app:fabSize="mini"
-        android:src="@drawable/settings_icon_24dp"/>
+
 
 
 </RelativeLayout>
